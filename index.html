@@ -3,111 +3,294 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Tes Pengesahan KBM</title>
+<title>Portal Tes Pengesahan KBM - MTS AMTSILATI</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(180deg,#b3e5fc,#fff);display:flex;justify-content:center;align-items:center;min-height:100vh;}
-.container{width:95%;max-width:900px;background:#ffffffcc;padding:40px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.1);text-align:center;}
-h1{margin:0;font-size:32px;color:#012a4a;}
-p{margin:6px 0 20px;color:#555;}
-.search-box{position:relative;width:100%;max-width:700px;margin:20px auto;}
-.search-box input{width:100%;padding:16px 20px;font-size:18px;border-radius:50px;border:2px solid #03a9f4;outline:none;box-shadow:0 4px 10px rgba(3,169,244,0.1);transition:all 0.2s;}
-.search-box input:focus{border-color:#0288d1;box-shadow:0 6px 16px rgba(3,169,244,0.2);}
-.results{display:grid;grid-template-columns:1fr;gap:16px;margin-top:20px;}
-@media(min-width:600px){.results{grid-template-columns:1fr 1fr;}}
-@media(min-width:900px){.results{grid-template-columns:1fr 1fr 1fr;}}
-.card{background:#ffffffdd;padding:16px 20px;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,0.08);display:flex;flex-direction:column;align-items:flex-start;transition:transform 0.25s,box-shadow 0.25s,opacity 0.3s;opacity:0;transform:translateY(12px);cursor:pointer;}
-.card.show{opacity:1;transform:translateY(0);}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.12);}
-.card .mapel{font-weight:700;font-size:18px;color:#012a4a;text-align:left;}
-.card .kelas{font-size:14px;color:#555;margin-top:4px;}
-.card a{margin-top:8px;display:inline-block;padding:6px 12px;background:#03a9f4;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;}
-.card a:hover{background:#0288d1;}
-.empty{margin-top:20px;color:#555;font-size:16px;}
-mark.hi{background:#fff3b0;color:#2b2b00;padding:0 .15em;border-radius:4px;}
+/* 1. VARIABEL WARNA (Agar mudah diganti-ganti) */
+:root {
+    --bg-dark: #06402B;      /* Hijau Emerald Gelap */
+    --accent-gold: #D4AF37;  /* Emas untuk aksen */
+    --text-main: #06402B;    /* Teks utama senada BG */
+    --card-bg: #ffffff;
+    --hover-bg: #f0f4f2;
+}
+
+/* 2. BASE STYLE */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    background: var(--card-bg);
+    padding: 40px 30px;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px;
+    color: var(--text-main);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+p.subtitle {
+    margin: 8px 0 25px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* 3. SEARCH BOX */
+.search-box {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 18px 25px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 2px solid #e0e0e0;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.search-box input:focus {
+    border-color: var(--bg-dark);
+    box-shadow: 0 0 0 4px rgba(6, 64, 43, 0.1);
+}
+
+/* 4. GRID RESULTS */
+.results {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media(min-width:650px){ .results { grid-template-columns: 1fr 1fr; } }
+@media(min-width:950px){ .results { grid-template-columns: 1fr 1fr 1fr; } }
+
+/* 5. CARD STYLE */
+.card {
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Garis aksen emas di bagian atas kartu */
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 5px;
+    background: var(--accent-gold);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    background: #fff;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-color: var(--accent-gold);
+}
+
+.card .mapel {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text-main);
+    line-height: 1.3;
+}
+
+.card .kelas {
+    font-size: 13px;
+    color: #777;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card .btn-open {
+    margin-top: 20px;
+    background: var(--bg-dark);
+    color: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.card:hover .btn-open {
+    background: #0a5a3d;
+}
+
+/* 6. UTILS */
+.empty {
+    padding: 40px;
+    color: #888;
+    grid-column: 1 / -1;
+}
+
+mark.hi {
+    background: #fff3b0;
+    color: #2b2b00;
+    padding: 0 2px;
+    border-radius: 3px;
+}
 </style>
 </head>
 <body>
+
 <div class="container">
-  <h1>Portal Tes Pengesahan KBM</h1>
-  <p>MTS AMTSILATI - Jl. Kenanga Dk. Sidorejo Ds. Bangsri Jepara 54321</p>
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Ketik kelas (7/8/9) atau nama mapel...">
-  </div>
-  <div id="results" class="results"></div>
+    <h1>Portal Tes Pengesahan KBM</h1>
+    <p class="subtitle">MTS AMTSILATI - Jl. Kenanga Dk. Sidorejo Ds. Bangsri Jepara</p>
+    
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Cari Mapel atau Kelas (7/8/9)..." autocomplete="off">
+    </div>
+    
+    <div id="results" class="results">
+        </div>
 </div>
 
 <script>
+// Pastikan URL CSV ini sudah benar dan di-publish to web
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
+
 let allData = [];
 
+// Fungsi parsing data CSV
 function parseCSV(text){
-  const lines = text.split(/\r?\n/);
-  const result=[];
-  if(lines.length === 0) return [];
-  
-  const headers=lines.shift().split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(h=>h.trim().toLowerCase());
-  const iKelas = headers.indexOf("kelas");
-  const iMapel = headers.indexOf("mapel");
-  const iLink  = headers.indexOf("link");
-  
-  lines.forEach(line=>{
-    if(!line.trim()) return;
-    const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c=>c.replace(/^"|"$/g,'').trim());
-    result.push({kelas:cols[iKelas], mapel:cols[iMapel], link:cols[iLink]});
-  });
-  return result.filter(x=>x.kelas && x.mapel);
-}
-
-async function fetchCSV(){
-  try{
-    const res = await fetch(CSV_URL);
-    const text = await res.text();
-    allData = parseCSV(text);
-  }catch(e){console.error("CSV error",e);}
-}
-
-function highlight(text,q){
-  if(!q) return text;
-  const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
-  return text.replace(re,m=>`<mark class="hi">${m}</mark>`);
-}
-
-function renderResults(data,q=""){
-  const container=document.getElementById("results");
-  container.innerHTML="";
-  if(data.length===0){container.innerHTML='<div class="empty">Tidak ada hasil.</div>'; return;}
-  
-  data.forEach((item,i)=>{
-    const div=document.createElement("div");
-    div.className="card";
+    const lines = text.split(/\r?\n/);
+    if(lines.length === 0) return [];
     
-    // Menggunakan onclick pada div kartu dan link untuk navigasi tab yang sama
-    div.innerHTML = `
-      <div class="mapel">${highlight(item.mapel,q)}</div>
-      <div class="kelas">Kelas ${highlight(item.kelas,q)}</div>
-      <a href="javascript:void(0)">Buka Soal</a>
-    `;
-
-    // Fungsi klik kartu
-    div.onclick = function() {
-      window.location.href = item.link;
-    };
-
-    container.appendChild(div);
-    setTimeout(()=>div.classList.add("show"),50+i*80);
-  });
+    // Ambil header dan cari posisi kolom
+    const headers = lines.shift().split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(h => h.trim().toLowerCase());
+    const iKelas = headers.indexOf("kelas");
+    const iMapel = headers.indexOf("mapel");
+    const iLink  = headers.indexOf("link");
+    
+    const result = [];
+    lines.forEach(line => {
+        if(!line.trim()) return;
+        const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g,'').trim());
+        if(cols[iMapel]) {
+            result.push({
+                kelas: cols[iKelas] || "-", 
+                mapel: cols[iMapel], 
+                link: cols[iLink] || "#"
+            });
+        }
+    });
+    return result;
 }
 
-document.getElementById("searchInput").addEventListener("input",function(){
-  const q=this.value.toLowerCase().trim();
-  if(!q){document.getElementById("results").innerHTML=""; return;}
-  const filtered=allData.filter(x=>x.kelas.toLowerCase().includes(q) || x.mapel.toLowerCase().includes(q));
-  renderResults(filtered,q);
+// Ambil data dari Google Sheets
+async function fetchCSV(){
+    try {
+        const res = await fetch(CSV_URL);
+        const text = await res.text();
+        allData = parseCSV(text);
+        console.log("Data loaded:", allData.length, "items");
+    } catch(e) {
+        console.error("Gagal memuat data CSV:", e);
+        document.getElementById("results").innerHTML = '<div class="empty">Gagal memuat data. Periksa koneksi internet.</div>';
+    }
+}
+
+// Efek highlight teks pencarian
+function highlight(text, q){
+    if(!q) return text;
+    const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+    return text.replace(re, m => `<mark class="hi">${m}</mark>`);
+}
+
+// Render data ke dalam HTML
+function renderResults(data, q = ""){
+    const container = document.getElementById("results");
+    container.innerHTML = "";
+    
+    if(data.length === 0){
+        container.innerHTML = '<div class="empty">Tidak ditemukan mata pelajaran yang cocok.</div>'; 
+        return;
+    }
+    
+    data.forEach((item, i) => {
+        const div = document.createElement("div");
+        div.className = "card";
+        
+        div.innerHTML = `
+            <div>
+                <div class="kelas">KELAS ${highlight(item.kelas, q)}</div>
+                <div class="mapel">${highlight(item.mapel, q)}</div>
+            </div>
+            <div class="btn-open">BUKA SOAL</div>
+        `;
+
+        // Klik pada seluruh kartu akan membuka link
+        div.onclick = function() {
+            if(item.link !== "#") {
+                window.location.href = item.link;
+            } else {
+                alert("Link belum tersedia.");
+            }
+        };
+
+        container.appendChild(div);
+        
+        // Animasi masuk satu per satu
+        setTimeout(() => div.classList.add("show"), 30 * i);
+    });
+}
+
+// Event Listener untuk kotak pencarian
+document.getElementById("searchInput").addEventListener("input", function(){
+    const q = this.value.toLowerCase().trim();
+    if(!q){
+        document.getElementById("results").innerHTML = ""; 
+        return;
+    }
+    const filtered = allData.filter(x => 
+        x.kelas.toLowerCase().includes(q) || 
+        x.mapel.toLowerCase().includes(q)
+    );
+    renderResults(filtered, q);
 });
 
+// Jalankan fungsi saat halaman dibuka
 fetchCSV();
 </script>
+
 </body>
 </html>
 
