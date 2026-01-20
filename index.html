@@ -7,19 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg-deep: #0a1a15;      /* Hijau Hitam Sangat Gelap */
-    --primary-green: #1b4332; /* Hijau Botol */
-    --accent-glow: #2d6a4f;  /* Hijau Terang untuk Hover */
-    --text-light: #f8f9fa;
-    --glass-white: rgba(255, 255, 255, 0.95);
+    --bg-body: #050c0a;       /* Hitam Hijau Pekat */
+    --bg-card: #0d1f1a;       /* Hijau Gelap untuk Kartu */
+    --primary-glow: #2d6a4f;  /* Hijau Glow */
+    --accent-gold: #d4af37;   /* Emas untuk detail */
+    --text-light: #e0e0e0;    /* Abu terang untuk teks */
+    --text-white: #ffffff;    /* Putih murni untuk judul */
 }
 
 body {
     margin: 0;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--bg-deep);
-    /* Sedikit sentuhan gradien gelap agar tidak flat */
-    background: radial-gradient(circle at top right, #132a22, #0a1a15);
+    background-color: var(--bg-body);
+    color: var(--text-light);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,74 +29,72 @@ body {
 
 .container {
     width: 100%;
-    max-width: 950px;
-    background: var(--glass-white);
-    padding: 50px 40px;
-    border-radius: 30px;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+    max-width: 900px;
     text-align: center;
 }
 
 h1 {
     margin: 0;
-    font-size: 34px;
-    color: var(--bg-deep);
+    font-size: 36px;
+    color: var(--text-white);
     font-weight: 800;
     letter-spacing: -1px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
 .subtitle {
-    margin: 10px 0 35px;
-    color: #6b7280;
-    font-size: 15px;
-    letter-spacing: 0.5px;
+    margin: 10px 0 40px;
+    color: var(--accent-gold);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-/* SEARCH AREA - Lebih Clean */
+/* SEARCH BOX DARK */
 .search-box {
-    max-width: 550px;
-    margin: 0 auto 40px;
+    max-width: 500px;
+    margin: 0 auto 50px;
 }
 
 .search-box input {
     width: 100%;
-    padding: 20px 28px;
+    padding: 18px 25px;
     font-size: 16px;
-    border-radius: 20px;
-    border: 1.5px solid #e5e7eb;
-    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #1a332c;
+    background: #0a1411;
     outline: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    color: #1f2937;
+    transition: all 0.3s ease;
+    color: var(--text-white);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .search-box input:focus {
-    border-color: var(--primary-green);
-    background: #fff;
-    box-shadow: 0 10px 25px rgba(27, 67, 50, 0.1);
-    transform: translateY(-2px);
+    border-color: var(--primary-glow);
+    box-shadow: 0 0 15px rgba(45, 106, 79, 0.3);
+    background: #0d1f1a;
 }
 
 /* RESULTS GRID */
 .results {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
 }
 
-/* CARD - RE-DESIGNED FOR ELEGANCE */
+/* CARD DARK ELEGANT */
 .card {
-    background: #ffffff;
-    padding: 28px;
-    border-radius: 24px;
-    border: 1px solid #f0f0f0;
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #1a332c;
     display: flex;
     flex-direction: column;
     text-align: left;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     position: relative;
-    overflow: hidden;
     opacity: 0;
     transform: translateY(20px);
 }
@@ -106,85 +104,78 @@ h1 {
     transform: translateY(0);
 }
 
-/* Indikator Elegan di Samping */
-.card::before {
-    content: "";
-    position: absolute;
-    left: 0; top: 20%; bottom: 20%;
-    width: 4px;
-    background: var(--primary-green);
-    border-radius: 0 4px 4px 0;
-    transition: all 0.3s;
-}
-
 .card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    border-color: #d1d5db;
-}
-
-.card:hover::before {
-    top: 0; bottom: 0;
-    width: 6px;
-    background: var(--accent-glow);
+    transform: translateY(-8px);
+    background: #132a22;
+    border-color: var(--primary-glow);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 10px rgba(45, 106, 79, 0.2);
 }
 
 .card .kelas {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    color: var(--primary-green);
+    color: var(--accent-gold);
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin-bottom: 8px;
-    display: block;
+    margin-bottom: 10px;
 }
 
 .card .mapel {
     font-weight: 700;
-    font-size: 20px;
-    color: #111827;
-    line-height: 1.2;
-    margin-bottom: 15px;
+    font-size: 19px;
+    color: var(--text-white);
+    line-height: 1.3;
+    margin-bottom: 20px;
 }
 
-.card .action-text {
-    font-size: 13px;
+.card .action {
+    font-size: 12px;
     font-weight: 600;
-    color: #9ca3af;
+    color: var(--primary-glow);
+    margin-top: auto;
     display: flex;
     align-items: center;
-    margin-top: auto;
+    gap: 8px;
     transition: color 0.3s;
 }
 
-.card:hover .action-text {
-    color: var(--primary-green);
+.card:hover .action {
+    color: #4ade80; /* Hijau lebih terang saat hover */
 }
 
-/* Highlight Color */
+/* Animasi sederhana untuk icon panah */
+.card .action::after {
+    content: "→";
+    transition: transform 0.3s;
+}
+
+.card:hover .action::after {
+    transform: translateX(5px);
+}
+
+/* Highlight Color (Warna emas transparan) */
 mark.hi {
-    background: #dcfce7;
-    color: #166534;
-    padding: 0 4px;
-    border-radius: 4px;
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--accent-gold);
+    padding: 0 2px;
+    border-radius: 2px;
 }
 
 .empty {
     grid-column: 1/-1;
     padding: 50px;
-    color: #9ca3af;
-    font-style: italic;
+    color: #4a5568;
 }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Portal Tes Pengesahan KBM</h1>
-    <p class="subtitle">MTS AMTSILATI - Jl. Kenanga Dk. Sidorejo Ds. Bangsri Jepara</p>
+    <h1>Portal Tes KBM</h1>
+    <p class="subtitle">MTS AMTSILATI BANGSRI</p>
     
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Cari mata pelajaran atau kelas..." autocomplete="off">
+        <input type="text" id="searchInput" placeholder="Cari Mata Pelajaran..." autocomplete="off">
     </div>
     
     <div id="results" class="results"></div>
@@ -219,7 +210,7 @@ async function fetchCSV(){
         const text = await res.text();
         allData = parseCSV(text);
     } catch(e) {
-        document.getElementById("results").innerHTML = '<div class="empty">Koneksi bermasalah.</div>';
+        document.getElementById("results").innerHTML = '<div class="empty">Gagal memuat data.</div>';
     }
 }
 
@@ -233,7 +224,7 @@ function renderResults(data, q = ""){
     const container = document.getElementById("results");
     container.innerHTML = "";
     if(data.length === 0){
-        container.innerHTML = '<div class="empty">Mata pelajaran tidak ditemukan.</div>'; 
+        container.innerHTML = '<div class="empty">Tidak ditemukan.</div>'; 
         return;
     }
     
@@ -241,14 +232,14 @@ function renderResults(data, q = ""){
         const div = document.createElement("div");
         div.className = "card";
         div.innerHTML = `
-            <span class="kelas">Kelas ${highlight(item.kelas, q)}</span>
+            <span class="kelas">KBM KELAS ${highlight(item.kelas, q)}</span>
             <div class="mapel">${highlight(item.mapel, q)}</div>
-            <div class="action-text">Klik untuk mengerjakan →</div>
+            <div class="action">KERJAKAN SEKARANG</div>
         `;
 
         div.onclick = () => { if(item.link !== "#") window.location.href = item.link; };
         container.appendChild(div);
-        setTimeout(() => div.classList.add("show"), 50 * i);
+        setTimeout(() => div.classList.add("show"), 40 * i);
     });
 }
 
