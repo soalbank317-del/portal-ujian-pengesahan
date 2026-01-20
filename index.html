@@ -3,103 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Tes Pengesahan KBM - MTS AMTSILATI</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Portal Tes KBM - MTS AMTSILATI</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* 1. VARIABEL WARNA (Agar mudah diganti-ganti) */
 :root {
-    --bg-dark: #06402B;      /* Hijau Emerald Gelap */
-    --accent-gold: #D4AF37;  /* Emas untuk aksen */
-    --text-main: #06402B;    /* Teks utama senada BG */
-    --card-bg: #ffffff;
-    --hover-bg: #f0f4f2;
+    --bg-deep: #0a1a15;      /* Hijau Hitam Sangat Gelap */
+    --primary-green: #1b4332; /* Hijau Botol */
+    --accent-glow: #2d6a4f;  /* Hijau Terang untuk Hover */
+    --text-light: #f8f9fa;
+    --glass-white: rgba(255, 255, 255, 0.95);
 }
 
-/* 2. BASE STYLE */
 body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-deep);
+    /* Sedikit sentuhan gradien gelap agar tidak flat */
+    background: radial-gradient(circle at top right, #132a22, #0a1a15);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px 0;
+    padding: 20px;
 }
 
 .container {
-    width: 90%;
-    max-width: 1000px;
-    background: var(--card-bg);
-    padding: 40px 30px;
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 950px;
+    background: var(--glass-white);
+    padding: 50px 40px;
+    border-radius: 30px;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
     text-align: center;
 }
 
 h1 {
     margin: 0;
-    font-size: 28px;
-    color: var(--text-main);
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    font-size: 34px;
+    color: var(--bg-deep);
+    font-weight: 800;
+    letter-spacing: -1px;
 }
 
-p.subtitle {
-    margin: 8px 0 25px;
-    color: #666;
-    font-size: 14px;
+.subtitle {
+    margin: 10px 0 35px;
+    color: #6b7280;
+    font-size: 15px;
+    letter-spacing: 0.5px;
 }
 
-/* 3. SEARCH BOX */
+/* SEARCH AREA - Lebih Clean */
 .search-box {
-    position: relative;
-    max-width: 600px;
-    margin: 0 auto 30px;
+    max-width: 550px;
+    margin: 0 auto 40px;
 }
 
 .search-box input {
     width: 100%;
-    padding: 18px 25px;
+    padding: 20px 28px;
     font-size: 16px;
-    border-radius: 15px;
-    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    border: 1.5px solid #e5e7eb;
+    background: #f9fafb;
     outline: none;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #1f2937;
 }
 
 .search-box input:focus {
-    border-color: var(--bg-dark);
-    box-shadow: 0 0 0 4px rgba(6, 64, 43, 0.1);
+    border-color: var(--primary-green);
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(27, 67, 50, 0.1);
+    transform: translateY(-2px);
 }
 
-/* 4. GRID RESULTS */
+/* RESULTS GRID */
 .results {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
 }
 
-@media(min-width:650px){ .results { grid-template-columns: 1fr 1fr; } }
-@media(min-width:950px){ .results { grid-template-columns: 1fr 1fr 1fr; } }
-
-/* 5. CARD STYLE */
+/* CARD - RE-DESIGNED FOR ELEGANCE */
 .card {
-    background: #fafafa;
-    padding: 20px;
-    border-radius: 16px;
-    border: 1px solid #eee;
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 24px;
+    border: 1px solid #f0f0f0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-align: left;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    text-align: left;
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(20px);
 }
 
 .card.show {
@@ -107,65 +106,74 @@ p.subtitle {
     transform: translateY(0);
 }
 
-/* Garis aksen emas di bagian atas kartu */
+/* Indikator Elegan di Samping */
 .card::before {
     content: "";
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 5px;
-    background: var(--accent-gold);
+    left: 0; top: 20%; bottom: 20%;
+    width: 4px;
+    background: var(--primary-green);
+    border-radius: 0 4px 4px 0;
+    transition: all 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    background: #fff;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    border-color: var(--accent-gold);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border-color: #d1d5db;
+}
+
+.card:hover::before {
+    top: 0; bottom: 0;
+    width: 6px;
+    background: var(--accent-glow);
+}
+
+.card .kelas {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-green);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    display: block;
 }
 
 .card .mapel {
     font-weight: 700;
-    font-size: 18px;
-    color: var(--text-main);
-    line-height: 1.3;
+    font-size: 20px;
+    color: #111827;
+    line-height: 1.2;
+    margin-bottom: 15px;
 }
 
-.card .kelas {
+.card .action-text {
     font-size: 13px;
-    color: #777;
-    margin-top: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.card .btn-open {
-    margin-top: 20px;
-    background: var(--bg-dark);
-    color: #fff;
-    padding: 12px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 14px;
     font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    transition: color 0.3s;
 }
 
-.card:hover .btn-open {
-    background: #0a5a3d;
+.card:hover .action-text {
+    color: var(--primary-green);
 }
 
-/* 6. UTILS */
-.empty {
-    padding: 40px;
-    color: #888;
-    grid-column: 1 / -1;
-}
-
+/* Highlight Color */
 mark.hi {
-    background: #fff3b0;
-    color: #2b2b00;
-    padding: 0 2px;
-    border-radius: 3px;
+    background: #dcfce7;
+    color: #166534;
+    padding: 0 4px;
+    border-radius: 4px;
+}
+
+.empty {
+    grid-column: 1/-1;
+    padding: 50px;
+    color: #9ca3af;
+    font-style: italic;
 }
 </style>
 </head>
@@ -176,25 +184,19 @@ mark.hi {
     <p class="subtitle">MTS AMTSILATI - Jl. Kenanga Dk. Sidorejo Ds. Bangsri Jepara</p>
     
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Cari Mapel atau Kelas (7/8/9)..." autocomplete="off">
+        <input type="text" id="searchInput" placeholder="Cari mata pelajaran atau kelas..." autocomplete="off">
     </div>
     
-    <div id="results" class="results">
-        </div>
+    <div id="results" class="results"></div>
 </div>
 
 <script>
-// Pastikan URL CSV ini sudah benar dan di-publish to web
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
-
 let allData = [];
 
-// Fungsi parsing data CSV
 function parseCSV(text){
     const lines = text.split(/\r?\n/);
     if(lines.length === 0) return [];
-    
-    // Ambil header dan cari posisi kolom
     const headers = lines.shift().split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(h => h.trim().toLowerCase());
     const iKelas = headers.indexOf("kelas");
     const iMapel = headers.indexOf("mapel");
@@ -205,92 +207,59 @@ function parseCSV(text){
         if(!line.trim()) return;
         const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g,'').trim());
         if(cols[iMapel]) {
-            result.push({
-                kelas: cols[iKelas] || "-", 
-                mapel: cols[iMapel], 
-                link: cols[iLink] || "#"
-            });
+            result.push({ kelas: cols[iKelas] || "-", mapel: cols[iMapel], link: cols[iLink] || "#" });
         }
     });
     return result;
 }
 
-// Ambil data dari Google Sheets
 async function fetchCSV(){
     try {
         const res = await fetch(CSV_URL);
         const text = await res.text();
         allData = parseCSV(text);
-        console.log("Data loaded:", allData.length, "items");
     } catch(e) {
-        console.error("Gagal memuat data CSV:", e);
-        document.getElementById("results").innerHTML = '<div class="empty">Gagal memuat data. Periksa koneksi internet.</div>';
+        document.getElementById("results").innerHTML = '<div class="empty">Koneksi bermasalah.</div>';
     }
 }
 
-// Efek highlight teks pencarian
 function highlight(text, q){
     if(!q) return text;
     const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
     return text.replace(re, m => `<mark class="hi">${m}</mark>`);
 }
 
-// Render data ke dalam HTML
 function renderResults(data, q = ""){
     const container = document.getElementById("results");
     container.innerHTML = "";
-    
     if(data.length === 0){
-        container.innerHTML = '<div class="empty">Tidak ditemukan mata pelajaran yang cocok.</div>'; 
+        container.innerHTML = '<div class="empty">Mata pelajaran tidak ditemukan.</div>'; 
         return;
     }
     
     data.forEach((item, i) => {
         const div = document.createElement("div");
         div.className = "card";
-        
         div.innerHTML = `
-            <div>
-                <div class="kelas">KELAS ${highlight(item.kelas, q)}</div>
-                <div class="mapel">${highlight(item.mapel, q)}</div>
-            </div>
-            <div class="btn-open">BUKA SOAL</div>
+            <span class="kelas">Kelas ${highlight(item.kelas, q)}</span>
+            <div class="mapel">${highlight(item.mapel, q)}</div>
+            <div class="action-text">Klik untuk mengerjakan →</div>
         `;
 
-        // Klik pada seluruh kartu akan membuka link
-        div.onclick = function() {
-            if(item.link !== "#") {
-                window.location.href = item.link;
-            } else {
-                alert("Link belum tersedia.");
-            }
-        };
-
+        div.onclick = () => { if(item.link !== "#") window.location.href = item.link; };
         container.appendChild(div);
-        
-        // Animasi masuk satu per satu
-        setTimeout(() => div.classList.add("show"), 30 * i);
+        setTimeout(() => div.classList.add("show"), 50 * i);
     });
 }
 
-// Event Listener untuk kotak pencarian
 document.getElementById("searchInput").addEventListener("input", function(){
     const q = this.value.toLowerCase().trim();
-    if(!q){
-        document.getElementById("results").innerHTML = ""; 
-        return;
-    }
-    const filtered = allData.filter(x => 
-        x.kelas.toLowerCase().includes(q) || 
-        x.mapel.toLowerCase().includes(q)
-    );
+    if(!q){ document.getElementById("results").innerHTML = ""; return; }
+    const filtered = allData.filter(x => x.kelas.toLowerCase().includes(q) || x.mapel.toLowerCase().includes(q));
     renderResults(filtered, q);
 });
 
-// Jalankan fungsi saat halaman dibuka
 fetchCSV();
 </script>
-
 </body>
 </html>
-
