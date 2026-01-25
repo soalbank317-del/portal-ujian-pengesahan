@@ -135,32 +135,33 @@
         .results {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
             width: 100%;
             max-width: 1100px;
             align-content: start;
         }
 
-        /* CARD 3D FIX SEJAJAR */
+        /* CARD 3D - LAYOUT CENTERED */
         .card {
             background: #ffffff;
             color: #111;
             border-radius: 25px;
-            padding: 25px;
+            padding: 30px;
             box-shadow: 0 10px 0 #e0e0e0, 0 15px 30px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             flex-direction: column;
+            align-items: center; /* Membuat semua isi kartu rata tengah */
+            text-align: center;
         }
         .card:hover { transform: translateY(-8px); box-shadow: 0 10px 0 var(--accent-color), 0 20px 40px rgba(0,0,0,0.2); }
 
-        /* FIX SEJAJAR CENTANG */
         .verified-header { 
             display: flex; 
-            align-items: center; /* Mengunci posisi vertikal di tengah */
+            align-items: center; 
             gap: 8px; 
-            margin-bottom: 12px; 
+            margin-bottom: 15px; 
         }
         .info-tag { font-size: 11px; font-weight: 800; color: #4b5563; text-transform: uppercase; margin: 0; }
         .verified-badge { 
@@ -173,7 +174,7 @@
             align-items: center; 
             justify-content: center; 
             font-size: 10px; 
-            flex-shrink: 0; /* Mencegah ikon gepeng */
+            flex-shrink: 0;
         }
 
         .badge-kelas {
@@ -182,12 +183,29 @@
             padding: 8px 18px;
             border-radius: 12px;
             font-weight: 900;
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 15px;
             display: inline-block;
             width: fit-content;
         }
-        .mapel { font-size: 22px; font-weight: 800; margin-bottom: 15px; line-height: 1.2; }
+        
+        /* NAMA MAPEL - DIPERBESAR & RATA TENGAH */
+        .mapel { 
+            font-size: 26px; /* Ukuran diperbesar */
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            line-height: 1.2; 
+            color: #111827;
+            width: 100%;
+        }
+
+        .btn-mulai {
+            font-size: 13px; 
+            font-weight: 800; 
+            color: #00AA5B; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         footer {
             position: fixed;
@@ -205,6 +223,7 @@
             .results { grid-template-columns: 1fr; }
             input { font-size: 17px; padding-left: 70px; }
             body.searching header { margin-top: -380px; }
+            .mapel { font-size: 22px; }
         }
     </style>
 </head>
@@ -251,7 +270,6 @@ function updateClock() {
 }
 setInterval(updateClock, 1000); updateClock();
 
-// RESET PINDAH TAB
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
         searchInput.value = '';
@@ -261,11 +279,9 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-// SLIDE LOGIC
 searchInput.addEventListener('focus', () => { body.classList.add('searching'); });
 searchInput.addEventListener('blur', () => { if (searchInput.value.trim() === "") body.classList.remove('searching'); });
 
-// DATA SPREADSHEET
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
 let allData = [];
 
@@ -310,7 +326,7 @@ function render(data) {
             </div>
             <div class="badge-kelas">KELAS ${item.kelas}</div>
             <div class="mapel">${item.mapel}</div>
-            <div style="font-size:12px; font-weight:700; color:#00AA5B; text-align:right;">MULAI TES ➔</div>
+            <div class="btn-mulai">MULAI TES SEKARANG ➔</div>
         `;
         card.onclick = () => { if(item.link !== "#") window.location.href = item.link; };
         container.appendChild(card);
