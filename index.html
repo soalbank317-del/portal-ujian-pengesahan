@@ -236,6 +236,10 @@ function updateClock() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     
+    // Sekarang hanya Jam:Menit:Detik (Detik tetap berwarna kuning agar beda)
+    document.getElementById('digital-clock').innerHTML = 
+        `${hours}:${minutes}:<span style="color: #facc15;">${seconds}</span>`;
+
     const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
     const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     document.getElementById('digital-date').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
@@ -323,6 +327,7 @@ function render(data) {
 </script>
 </body>
 </html>
+
 
 
 
