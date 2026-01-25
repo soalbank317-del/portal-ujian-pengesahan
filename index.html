@@ -21,69 +21,66 @@
             background-image: radial-gradient(circle at top right, #39da63, #2bad4e);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            padding: 40px 15px;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 15px 0; /* Padding bawah 0 karena ada footer */
         }
 
         .container {
             width: 100%;
             max-width: 1100px;
             text-align: center;
+            flex: 1; /* Agar kontainer mengambil ruang sisa dan mendorong footer ke bawah */
         }
 
-        /* ANIMASI KARTUN MASKOT */
+        /* LOGO & MASKOT */
         .mascot-container {
             position: relative;
             display: inline-block;
             margin-bottom: 20px;
         }
-
         .mascot-img {
-            width: 120px;
+            width: 100px;
             height: auto;
             animation: float 3s ease-in-out infinite;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(-5deg); }
             50% { transform: translateY(-15px) rotate(5deg); }
         }
-
-        /* LOGO MADRASAH */
         .logo-madrasah {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             background: white;
             border-radius: 50%;
             display: inline-block;
-            padding: 10px;
+            padding: 8px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border: 4px solid rgba(255, 255, 255, 0.4);
-            margin-top: -30px;
+            margin-top: -25px;
             position: relative;
             z-index: 2;
         }
         .logo-madrasah img { width: 100%; height: 100%; object-fit: contain; }
 
         h1 {
-            font-size: clamp(28px, 6vw, 48px);
-            margin: 15px 0 5px;
+            font-size: clamp(26px, 6vw, 44px);
+            margin: 10px 0 5px;
             font-weight: 800;
             color: var(--white);
             text-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-
         .subtitle {
             font-weight: 800;
-            font-size: 16px;
-            letter-spacing: 4px;
+            font-size: 14px;
+            letter-spacing: 3px;
             color: var(--white);
             text-transform: uppercase;
             margin-bottom: 40px;
         }
 
-        /* SEARCH BOX */
+        /* SEARCH BOX DENGAN IKON 🔍 */
         .search-box { 
             margin: 0 auto 50px; 
             max-width: 550px; 
@@ -91,12 +88,23 @@
             top: 20px;
             z-index: 1000;
         }
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-wrapper span {
+            position: absolute;
+            left: 25px;
+            font-size: 20px;
+            pointer-events: none;
+        }
         .search-box input {
             width: 100%;
             background: white;
             border: none;
-            padding: 20px 35px;
-            border-radius: 25px;
+            padding: 18px 25px 18px 60px; /* Padding kiri lebih besar untuk ikon */
+            border-radius: 50px;
             color: #111827;
             font-size: 18px;
             font-weight: 600;
@@ -104,12 +112,14 @@
             outline: none;
             transition: 0.3s;
         }
-        .search-box input:focus { transform: scale(1.03); }
+        .search-box input:focus { transform: scale(1.02); }
 
+        /* GRID RESULTS */
         .results {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
+            padding-bottom: 50px;
         }
 
         /* CARD STYLE */
@@ -120,73 +130,73 @@
             text-align: left;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            position: relative;
             animation: popIn 0.5s ease backwards;
         }
-
         @keyframes popIn {
-            from { opacity: 0; transform: scale(0.8); }
+            from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
-
         .card:hover {
-            transform: translateY(-15px) rotate(1deg);
+            transform: translateY(-12px) rotate(1deg);
             box-shadow: 0 30px 60px rgba(0,0,0,0.2);
         }
-
         .card .badge-kelas {
             background: var(--accent-color);
             color: var(--text-color, white); 
-            padding: 10px 22px;
-            border-radius: 15px;
-            font-size: 24px;
+            padding: 8px 20px;
+            border-radius: 12px;
+            font-size: 22px;
             font-weight: 800;
             display: inline-block;
             margin-bottom: 20px;
         }
-
         .card .mapel {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             color: #111827;
-            line-height: 1.2;
-            margin-bottom: 30px;
+            line-height: 1.3;
+            margin-bottom: 25px;
             flex-grow: 1;
         }
-
         .card .action-label {
             font-weight: 800;
             font-size: 13px;
             color: var(--accent-color);
-            padding-top: 20px;
+            padding-top: 15px;
             border-top: 2px solid #f3f4f6;
             display: flex;
             justify-content: space-between;
         }
 
-        /* INFO MESSAGE */
-        .info-msg {
+        /* INFO MSG */
+        .empty-msg {
             grid-column: 1/-1;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 50px;
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
+            padding: 40px;
             font-weight: 800;
-            color: var(--white);
-            border: 3px dashed rgba(255, 255, 255, 0.4);
-            font-size: 20px;
+            color: white;
+            font-size: 18px;
         }
 
-        .info-msg span { font-size: 50px; display: block; margin-bottom: 10px; }
+        /* FOOTER */
+        footer {
+            width: 100%;
+            padding: 30px 0;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+        }
 
         mark.hi { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 4px; }
 
         @media (max-width: 600px) {
             .results { grid-template-columns: 1fr; }
-            .mascot-img { width: 90px; }
         }
     </style>
 </head>
@@ -205,16 +215,19 @@
     <p class="subtitle">MTs Amtsilati - KBM Online</p>
 
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Ayo cari mata pelajaranmu..." autocomplete="off">
+        <div class="search-wrapper">
+            <span>🔍</span>
+            <input type="text" id="searchInput" placeholder="Cari mata pelajaran..." autocomplete="off">
+        </div>
     </div>
 
     <div id="results" class="results">
-        <div class="info-msg">
-            <span>🔍</span>
-            Silakan ketik nama mata pelajaran untuk mulai mencari.
         </div>
-    </div>
 </div>
+
+<footer>
+    &copy; 2026 MTs Amtsilati. Dikembangkan dengan ❤️ untuk Siswa Madrasah.
+</footer>
 
 <script>
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
@@ -247,12 +260,14 @@ function getCardStyle(kelas) {
 
 function render(data, q = "") {
     const container = document.getElementById("results");
+    
     if (q.length === 0) {
-        container.innerHTML = '<div class="info-msg"><span>🔍</span>Silakan ketik nama mata pelajaran untuk mulai mencari.</div>';
+        container.innerHTML = "";
         return;
     }
+
     if (data.length === 0) {
-        container.innerHTML = '<div class="info-msg"><span>😢</span>Maaf, mata pelajaran tidak ditemukan.</div>';
+        container.innerHTML = '<div class="empty-msg">😢 Mata pelajaran tidak ditemukan.</div>';
         return;
     }
 
@@ -263,7 +278,7 @@ function render(data, q = "") {
         card.className = "card";
         card.style.setProperty('--accent-color', style.accent);
         card.style.setProperty('--text-color', style.text);
-        card.style.animationDelay = (index * 0.05) + "s";
+        card.style.animationDelay = (index * 0.03) + "s";
         
         card.innerHTML = `
             <div><span class="badge-kelas">KELAS ${item.kelas}</span></div>
