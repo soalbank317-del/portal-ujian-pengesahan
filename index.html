@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTAL TES PENGESAHAN KBM</title>
+    <title>PORTAL TES PENGESAHAN</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-app: #31c157; 
             --white: #ffffff;
-            /* Warna Aksen Kelas */
             --cls-7: #2563eb; 
             --cls-8: #facc15; 
             --cls-9: #dc2626; 
@@ -27,22 +26,6 @@
             flex-direction: column;
             overflow-x: hidden;
             color: var(--white);
-        }
-
-        /* MASKOT POJOK */
-        .corner-mascot {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 90px;
-            z-index: 999;
-            pointer-events: none;
-            animation: floatMascot 4s ease-in-out infinite;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
-        }
-        @keyframes floatMascot {
-            0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50% { transform: translateY(-20px) rotate(3deg); }
         }
 
         .container {
@@ -83,21 +66,19 @@
             margin: 10px 0 25px;
         }
 
-        /* CLOCK GLASS STYLE */
         .clock-container {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             display: inline-block;
             padding: 15px 35px;
             border-radius: 20px;
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             margin-bottom: 40px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        #digital-clock { font-size: 32px; font-weight: 800; letter-spacing: 2px; }
+        #digital-clock { font-size: clamp(24px, 5vw, 32px); font-weight: 800; letter-spacing: 2px; }
         #digital-date { font-size: 13px; font-weight: 700; margin-top: 5px; opacity: 0.9; }
 
-        /* SEARCH BOX */
         .search-box { 
             margin: 0 auto 50px; 
             max-width: 550px; 
@@ -105,11 +86,10 @@
             top: 20px;
             z-index: 1000;
         }
-        .search-wrapper { position: relative; display: flex; align-items: center; }
-        .search-wrapper .icon { position: absolute; left: 25px; font-size: 22px; z-index: 10; }
+        .search-wrapper .icon { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); font-size: 22px; z-index: 10; }
         .search-box input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             border: none;
             padding: 20px 25px 20px 70px;
             border-radius: 50px;
@@ -119,10 +99,9 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             outline: none;
             transition: 0.3s;
+            box-sizing: border-box;
         }
-        .search-box input:focus { background: #fff; transform: scale(1.02); }
 
-        /* GRID RESULTS */
         .results {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -130,12 +109,12 @@
             padding-bottom: 50px;
         }
 
-        /* CARD SEMI-TRANSPARENT (GLOSSY) */
+        /* CARD SEMI-TRANSPARENT (REFINED GLOSSY) */
         .card {
-            background: rgba(255, 255, 255, 0.15); /* Transparan */
-            backdrop-filter: blur(20px); /* Efek Kaca */
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25); /* Transparansi dikurangi agar lebih solid */
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 30px;
             padding: 35px;
             text-align: left;
@@ -145,60 +124,49 @@
             flex-direction: column;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        /* Efek Glossy / Cahaya di kartu */
-        .card::before {
-            content: "";
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-            transform: rotate(30deg);
-            transition: 0.5s;
-            pointer-events: none;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
 
         .card:hover {
-            transform: translateY(-15px) scale(1.02);
-            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 0.35);
             border-color: var(--accent-color);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3), 0 0 20px var(--accent-color);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2), 0 0 20px var(--accent-color);
         }
 
-        /* Badge Kelas Tetap Kontras */
         .card .badge-kelas {
             background: var(--accent-color);
             color: var(--text-color, white); 
             padding: 12px 25px;
             border-radius: 18px;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 900;
             display: inline-block;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            text-transform: uppercase;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         }
 
         .card .mapel {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 800;
             color: white;
             line-height: 1.2;
-            margin-bottom: 30px;
-            flex-grow: 1;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        /* Info tambahan di dalam kartu agar menarik */
-        .card .info-tag {
-            font-size: 12px;
+        /* Keterangan Teliti */
+        .card .warning-text {
+            font-size: 13px;
             font-weight: 700;
-            background: rgba(0,0,0,0.2);
-            padding: 5px 12px;
-            border-radius: 50px;
-            margin-bottom: 10px;
-            display: inline-block;
+            color: #fff;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .card .action-label {
@@ -206,38 +174,47 @@
             font-size: 14px;
             color: var(--accent-color);
             padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
+            border-top: 2px solid rgba(255,255,255,0.2);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
+        /* PROFESSIONAL FOOTER */
         footer {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            padding: 50px 20px;
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
         }
 
-        .footer-text { font-size: 15px; font-weight: 800; }
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-logo { font-size: 20px; font-weight: 800; margin-bottom: 15px; letter-spacing: 1px; }
+        .footer-text { font-size: 14px; font-weight: 600; opacity: 0.9; line-height: 1.6; }
+        .footer-separator { width: 50px; height: 3px; background: var(--bg-app); margin: 20px auto; border-radius: 5px; }
+        .footer-copy { font-size: 12px; font-weight: 700; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+
+        mark.hi { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 4px; }
 
         @media (max-width: 600px) {
             .results { grid-template-columns: 1fr; }
-            #digital-clock { font-size: 26px; }
         }
     </style>
 </head>
 <body>
-
-    <img src="https://cdn-icons-png.flaticon.com/512/3588/3588613.png" class="corner-mascot" alt="Mascot">
 
     <div class="container">
         <div class="logo-madrasah">
             <img src="https://i.ibb.co.com/1fHCTtJ5/logo.png" alt="Logo">
         </div>
         
-        <h1>PORTAL TES PENGESAHAN KBM</h1>
+        <h1>PORTAL TES PENGESAHAN</h1>
         <p class="subtitle">MTs Amtsilati - KBM Online</p>
 
         <div class="clock-container">
@@ -248,7 +225,7 @@
         <div class="search-box">
             <div class="search-wrapper">
                 <span class="icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Ketik mata pelajaran..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="Cari nama mata pelajaran..." autocomplete="off">
             </div>
         </div>
 
@@ -256,13 +233,20 @@
     </div>
 
     <footer>
-        <div class="footer-text">
-            &copy; 2026 MTs Amtsilati. Dikembangkan dengan ❤️ untuk Siswa Madrasah.
+        <div class="footer-container">
+            <div class="footer-logo">MTs AMTSILATI</div>
+            <div class="footer-text">
+                Portal Tes Pengesahan KBM merupakan platform digital resmi untuk mendukung proses <br> 
+                pembelajaran yang transparan, akuntabel, dan inovatif di lingkungan Madrasah.
+            </div>
+            <div class="footer-separator"></div>
+            <div class="footer-copy">
+                &copy; 2026 MTs Amtsilati. Dikembangkan dengan ❤️ untuk Siswa Madrasah.
+            </div>
         </div>
     </footer>
 
 <script>
-// --- JAM DIGITAL ---
 function updateClock() {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
@@ -276,7 +260,6 @@ function updateClock() {
 }
 setInterval(updateClock, 1000); updateClock();
 
-// --- SEARCH & RENDER ---
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
 let allData = [];
 
@@ -318,11 +301,11 @@ function render(data, q = "") {
         card.style.setProperty('--text-color', style.text);
         
         card.innerHTML = `
-            <div class="info-tag">MADRASAH DIGITAL</div>
             <div><span class="badge-kelas">KELAS ${item.kelas}</span></div>
             <div class="mapel">${item.mapel}</div>
+            <div class="warning-text">⚠️ Periksa kembali identitas & teliti sebelum memilih.</div>
             <div class="action-label">
-                <span>KLIK UNTUK MENGERJAKAN</span>
+                <span>MASUK KE TES</span>
                 <span style="font-size:20px">➔</span>
             </div>
         `;
