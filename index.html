@@ -22,65 +22,68 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 40px 15px 0; /* Padding bawah 0 karena ada footer */
+            overflow-x: hidden;
+        }
+
+        /* ANIMASI KARTUN DI POJOK (FLOAT) */
+        .corner-mascot {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 100px;
+            z-index: 999;
+            pointer-events: none;
+            animation: floatMascot 4s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+        }
+
+        @keyframes floatMascot {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-20px) rotate(3deg); }
         }
 
         .container {
             width: 100%;
             max-width: 1100px;
             text-align: center;
-            flex: 1; /* Agar kontainer mengambil ruang sisa dan mendorong footer ke bawah */
+            flex: 1;
+            margin: 0 auto;
+            padding: 50px 15px;
         }
 
-        /* LOGO & MASKOT */
-        .mascot-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        .mascot-img {
-            width: 100px;
-            height: auto;
-            animation: float 3s ease-in-out infinite;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
-        }
+        /* LOGO HEADER */
         .logo-madrasah {
-            width: 90px;
-            height: 90px;
+            width: 110px;
+            height: 110px;
             background: white;
             border-radius: 50%;
             display: inline-block;
-            padding: 8px;
+            padding: 10px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border: 4px solid rgba(255, 255, 255, 0.4);
-            margin-top: -25px;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 20px;
         }
         .logo-madrasah img { width: 100%; height: 100%; object-fit: contain; }
 
         h1 {
-            font-size: clamp(26px, 6vw, 44px);
-            margin: 10px 0 5px;
+            font-size: clamp(28px, 6vw, 48px);
+            margin: 0;
             font-weight: 800;
             color: var(--white);
             text-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .subtitle {
-            font-weight: 800;
-            font-size: 14px;
-            letter-spacing: 3px;
-            color: var(--white);
-            text-transform: uppercase;
-            margin-bottom: 40px;
+            letter-spacing: -1.5px;
         }
 
-        /* SEARCH BOX DENGAN IKON 🔍 */
+        .subtitle {
+            font-weight: 800;
+            font-size: 16px;
+            letter-spacing: 4px;
+            color: var(--white);
+            text-transform: uppercase;
+            margin: 10px 0 40px;
+        }
+
+        /* SEARCH BOX DENGAN IKON */
         .search-box { 
             margin: 0 auto 50px; 
             max-width: 550px; 
@@ -93,17 +96,16 @@
             display: flex;
             align-items: center;
         }
-        .search-wrapper span {
+        .search-wrapper .icon {
             position: absolute;
             left: 25px;
             font-size: 20px;
-            pointer-events: none;
         }
         .search-box input {
             width: 100%;
             background: white;
             border: none;
-            padding: 18px 25px 18px 60px; /* Padding kiri lebih besar untuk ikon */
+            padding: 20px 25px 20px 65px;
             border-radius: 50px;
             color: #111827;
             font-size: 18px;
@@ -112,17 +114,14 @@
             outline: none;
             transition: 0.3s;
         }
-        .search-box input:focus { transform: scale(1.02); }
 
         /* GRID RESULTS */
         .results {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
-            padding-bottom: 50px;
         }
 
-        /* CARD STYLE */
         .card {
             background: white;
             border-radius: 28px;
@@ -135,99 +134,116 @@
             flex-direction: column;
             animation: popIn 0.5s ease backwards;
         }
+
         @keyframes popIn {
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
+
         .card:hover {
-            transform: translateY(-12px) rotate(1deg);
+            transform: translateY(-12px);
             box-shadow: 0 30px 60px rgba(0,0,0,0.2);
         }
+
         .card .badge-kelas {
             background: var(--accent-color);
             color: var(--text-color, white); 
-            padding: 8px 20px;
-            border-radius: 12px;
-            font-size: 22px;
+            padding: 10px 25px;
+            border-radius: 15px;
+            font-size: 26px; /* Super Big */
             font-weight: 800;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
+
         .card .mapel {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             color: #111827;
-            line-height: 1.3;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             flex-grow: 1;
         }
+
         .card .action-label {
             font-weight: 800;
             font-size: 13px;
             color: var(--accent-color);
-            padding-top: 15px;
+            padding-top: 20px;
             border-top: 2px solid #f3f4f6;
             display: flex;
             justify-content: space-between;
         }
 
-        /* INFO MSG */
-        .empty-msg {
-            grid-column: 1/-1;
-            padding: 40px;
-            font-weight: 800;
+        /* FOOTER PROFESIONAL */
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 18px;
+            margin-top: auto;
         }
 
-        /* FOOTER */
-        footer {
-            width: 100%;
-            padding: 30px 0;
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
-            backdrop-filter: blur(10px);
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-credit {
+            font-size: 12px;
+            margin-top: 10px;
+            opacity: 0.7;
+            font-weight: 400;
         }
 
         mark.hi { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 4px; }
 
         @media (max-width: 600px) {
-            .results { grid-template-columns: 1fr; }
+            .corner-mascot { width: 70px; bottom: 100px; right: 10px; }
+            h1 { font-size: 26px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="mascot-container">
-        <img src="https://cdn-icons-png.flaticon.com/512/3426/3426653.png" class="mascot-img" alt="Mascot">
-        <br>
+    <img src="https://cdn-icons-png.flaticon.com/512/3588/3588613.png" class="corner-mascot" alt="Mascot">
+
+    <div class="container">
         <div class="logo-madrasah">
             <img src="https://i.ibb.co.com/1fHCTtJ5/logo.png" alt="Logo">
         </div>
-    </div>
-    
-    <h1>Portal Tes Pengesahan</h1>
-    <p class="subtitle">MTs Amtsilati - KBM Online</p>
+        
+        <h1>Portal Tes Pengesahan</h1>
+        <p class="subtitle">MTs Amtsilati - KBM Online</p>
 
-    <div class="search-box">
-        <div class="search-wrapper">
-            <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="Cari mata pelajaran..." autocomplete="off">
+        <div class="search-box">
+            <div class="search-wrapper">
+                <span class="icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Cari mata pelajaran..." autocomplete="off">
+            </div>
         </div>
+
+        <div id="results" class="results">
+            </div>
     </div>
 
-    <div id="results" class="results">
+    <footer>
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2026 MTs Amtsilati. Dikembangkan dengan ❤️ untuk Siswa Madrasah.
+            </div>
+            <div class="footer-credit">
+                Sistem Portal Ujian Digital - Standar Kualitas Madrasah Mandiri Berprestasi
+            </div>
         </div>
-</div>
-
-<footer>
-    &copy; 2026 MTs Amtsilati. Dikembangkan dengan ❤️ untuk Siswa Madrasah.
-</footer>
+    </footer>
 
 <script>
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
@@ -238,7 +254,7 @@ async function init() {
         const res = await fetch(CSV_URL);
         const text = await res.text();
         allData = parseCSV(text);
-    } catch (e) { console.error("Error loading data"); }
+    } catch (e) { console.error("Data error"); }
 }
 
 function parseCSV(text) {
@@ -260,14 +276,12 @@ function getCardStyle(kelas) {
 
 function render(data, q = "") {
     const container = document.getElementById("results");
-    
     if (q.length === 0) {
         container.innerHTML = "";
         return;
     }
-
     if (data.length === 0) {
-        container.innerHTML = '<div class="empty-msg">😢 Mata pelajaran tidak ditemukan.</div>';
+        container.innerHTML = '<div style="grid-column: 1/-1; padding: 50px; font-weight: 800; color: white;">😢 Tidak ditemukan.</div>';
         return;
     }
 
@@ -283,7 +297,7 @@ function render(data, q = "") {
         card.innerHTML = `
             <div><span class="badge-kelas">KELAS ${item.kelas}</span></div>
             <div class="mapel">${item.mapel.replace(new RegExp(q, 'gi'), m => `<mark class="hi">${m}</mark>`)}</div>
-            <div class="action-label"><span>MULA SEKARANG</span><span>➔</span></div>
+            <div class="action-label"><span>MULAI TES</span><span>➔</span></div>
         `;
         
         card.onclick = () => { if(item.link !== "#") window.open(item.link, '_blank'); };
