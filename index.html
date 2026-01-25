@@ -7,22 +7,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Warna Hijau Tokopedia */
-            --bg-app: #00AA5B; 
+            --bg-app: #00AA5B; /* Hijau Tokopedia */
             --white: #ffffff;
-            /* Warna Aksen Kelas */
             --cls-7: #2563eb; 
             --cls-8: #facc15; 
             --cls-9: #dc2626; 
+            --verified-purple: #9b59b6; /* Warna Ungu Centang */
         }
 
         body {
             margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-app);
-            background-image: 
-                radial-gradient(circle at 20% 20%, #00c86b 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, #008f4d 0%, transparent 40%);
+            background-image: linear-gradient(135deg, #00AA5B 0%, #008f4d 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -30,20 +27,21 @@
             color: var(--white);
         }
 
-        /* MASKOT POJOK */
-        .corner-mascot {
+        /* MASKOT ROBOT DI POJOK */
+        .corner-robot {
             position: fixed;
-            bottom: 100px;
+            bottom: 90px;
             right: 20px;
-            width: 85px;
+            width: 80px;
             z-index: 999;
             pointer-events: none;
-            animation: floatMascot 4s ease-in-out infinite;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
         }
-        @keyframes floatMascot {
-            0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50% { transform: translateY(-20px) rotate(3deg); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-15px) translateX(-5px); }
         }
 
         .container {
@@ -62,49 +60,44 @@
             border-radius: 50%;
             display: inline-block;
             padding: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2), inset 0 -5px 10px rgba(0,0,0,0.1);
-            border: 4px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            border: 4px solid rgba(255, 255, 255, 0.3);
             margin-bottom: 15px;
         }
         .logo-madrasah img { width: 100%; height: 100%; object-fit: contain; }
 
         h1 {
-            font-size: clamp(26px, 5vw, 42px);
+            font-size: clamp(24px, 5vw, 40px);
             margin: 0;
             font-weight: 800;
-            letter-spacing: -1.5px;
-            text-shadow: 0 2px 0 #008f4d, 0 4px 10px rgba(0,0,0,0.3);
+            letter-spacing: -1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .subtitle {
             font-weight: 800;
             font-size: 13px;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             margin: 8px 0 20px;
+            opacity: 0.9;
         }
 
-        /* 3D CLOCK DIPERKECIL */
+        /* 3D CLOCK MINIMALIS */
         .clock-container {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             display: inline-block;
             padding: 10px 25px;
-            border-radius: 18px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 15px;
+            backdrop-filter: blur(10px); /* Blur dikurangi agar enteng */
+            border: 1px solid rgba(255, 255, 255, 0.3);
             margin-bottom: 35px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2), 0 4px 0 rgba(255,255,255,0.3) inset;
-            transform: perspective(1000px) rotateX(5deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 4px 0 rgba(255,255,255,0.2) inset;
         }
-        #digital-clock { 
-            font-size: 22px; 
-            font-weight: 800; 
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
+        #digital-clock { font-size: 24px; font-weight: 800; letter-spacing: 2px; }
         #digital-date { font-size: 11px; font-weight: 700; margin-top: 3px; }
 
-        /* SEARCH BOX DIPERBESAR */
+        /* SEARCH BOX SUPER BESAR */
         .search-box { 
             margin: 0 auto 50px; 
             max-width: 750px; 
@@ -117,125 +110,126 @@
             width: 100%;
             background: #ffffff;
             border: none;
-            padding: 24px 30px 24px 85px;
-            border-radius: 60px;
+            padding: 22px 30px 22px 80px;
+            border-radius: 50px;
             color: #111827;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 600;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25), inset 0 -4px 0 rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             outline: none;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-sizing: border-box;
         }
-        .search-box input:focus { transform: scale(1.02); }
 
         .results {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
+            gap: 25px;
             padding-bottom: 50px;
         }
 
-        /* 3D SOLID GLASS CARD */
+        /* 3D SOLID CARD */
         .card {
-            background: rgba(255, 255, 255, 0.5); /* Lebih Solid */
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 35px;
-            padding: 35px;
+            background: #ffffff; /* Dibuat solid agar performa naik */
+            border-radius: 25px;
+            padding: 30px;
             text-align: left;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             position: relative;
-            overflow: hidden;
-            box-shadow: 
-                0 20px 40px rgba(0,0,0,0.15),
-                0 8px 0 rgba(0,0,0,0.1),
-                inset 0 2px 0 rgba(255,255,255,0.4);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 0 #e0e0e0;
         }
 
         .card:hover {
-            transform: translateY(-15px) scale(1.03);
-            background: rgba(255, 255, 255, 0.7);
-            border-color: var(--accent-color);
-            box-shadow: 
-                0 30px 60px rgba(0,0,0,0.25), 
-                0 10px 0 var(--accent-color), 
-                0 0 20px var(--accent-color);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 6px 0 var(--accent-color);
+        }
+
+        /* INFO TAG DENGAN CENTANG UNGU */
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+        .info-tag {
+            font-size: 11px;
+            font-weight: 800;
+            color: #4b5563;
+            text-transform: uppercase;
+        }
+        .verified-badge {
+            background: var(--verified-purple);
+            color: white;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
         }
 
         .card .badge-kelas {
             background: var(--accent-color);
             color: var(--text-color, white); 
-            padding: 12px 25px;
-            border-radius: 20px;
-            font-size: 24px;
-            font-weight: 900;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 22px;
+            font-weight: 800;
             display: inline-block;
-            margin-bottom: 20px;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+            margin-bottom: 15px;
         }
 
         .card .mapel {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 800;
-            color: #111827; /* Teks gelap agar lebih terbaca di kartu solid */
-            line-height: 1.2;
+            color: #111827;
+            line-height: 1.3;
             margin-bottom: 15px;
         }
 
         .card .warning-text {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
-            color: #111827;
-            background: rgba(0,0,0,0.05);
-            padding: 10px 15px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: #4b5563;
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
         .card .action-label {
             font-weight: 800;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--accent-color);
-            padding-top: 20px;
-            border-top: 3px solid rgba(0,0,0,0.05);
+            padding-top: 15px;
+            border-top: 2px solid #f3f4f6;
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
 
-        /* PROFESSIONAL FOOTER */
         footer {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            padding: 60px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 50px 20px;
             text-align: center;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
             margin-top: auto;
         }
-        .footer-logo { font-size: 24px; font-weight: 800; margin-bottom: 15px; letter-spacing: 2px; }
-        .footer-text { font-size: 14px; font-weight: 600; opacity: 0.9; line-height: 1.6; max-width: 700px; margin: 0 auto; }
-        .footer-separator { width: 60px; height: 4px; background: var(--bg-app); margin: 25px auto; border-radius: 10px; }
-        .footer-copy { font-size: 12px; font-weight: 700; opacity: 0.6; letter-spacing: 1px; }
-
-        mark.hi { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 4px; }
+        .footer-logo { font-size: 22px; font-weight: 800; margin-bottom: 10px; color: var(--white); }
+        .footer-text { font-size: 13px; font-weight: 600; opacity: 0.8; max-width: 600px; margin: 0 auto; }
+        .footer-separator { width: 50px; height: 3px; background: var(--bg-app); margin: 20px auto; border-radius: 10px; }
 
         @media (max-width: 600px) {
             .results { grid-template-columns: 1fr; }
-            .search-box input { font-size: 17px; padding-left: 65px; }
+            .corner-robot { width: 60px; right: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <img src="https://cdn-icons-png.flaticon.com/512/3588/3588613.png" class="corner-mascot" alt="Mascot">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" class="corner-robot" alt="Robot">
 
     <div class="container">
         <div class="logo-madrasah">
@@ -253,7 +247,7 @@
         <div class="search-box">
             <div class="search-wrapper">
                 <span class="icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Ketik nama mata pelajaran atau kelas..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="Cari Mata Pelajaran atau Kelas..." autocomplete="off">
             </div>
         </div>
 
@@ -261,16 +255,14 @@
     </div>
 
     <footer>
-        <div class="footer-container">
-            <div class="footer-logo">MTs AMTSILATI</div>
-            <div class="footer-text">
-                Platform digital resmi MTs Amtsilati untuk pelaksanaan evaluasi pembelajaran. <br> 
-                Wujudkan pendidikan madrasah yang modern, jujur, dan berprestasi.
-            </div>
-            <div class="footer-separator"></div>
-            <div class="footer-copy">
-                &copy; 2026 MTs Amtsilati. Dikembangkan dengan ❤️ untuk Siswa Madrasah.
-            </div>
+        <div class="footer-logo">MTs AMTSILATI</div>
+        <div class="footer-text">
+            Sistem evaluasi digital madrasah mandiri berprestasi. <br> 
+            Gunakan kejujuran sebagai modal utama kesuksesanmu.
+        </div>
+        <div class="footer-separator"></div>
+        <div style="font-size: 11px; font-weight: 700; opacity: 0.5;">
+            &copy; 2026 MTs Amtsilati. Dikembangkan dengan ❤️ untuk Siswa Madrasah.
         </div>
     </footer>
 
@@ -281,7 +273,6 @@ function updateClock() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     document.getElementById('digital-clock').textContent = `${hours}:${minutes}:${seconds} WIB`;
-
     const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
     const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     document.getElementById('digital-date').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
@@ -304,7 +295,7 @@ function parseCSV(text) {
     const headers = lines[0].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(h => h.trim().toLowerCase());
     const iK = headers.indexOf("kelas"), iM = headers.indexOf("mapel"), iL = headers.indexOf("link");
     return lines.slice(1).filter(l => l.trim()).map(line => {
-        const c = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g,'').trim());
+        const c = line.split(/,(?=(?:(?:[^!]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g,'').trim());
         return { kelas: c[iK] || "", mapel: c[iM] || "", link: c[iL] || "#" };
     });
 }
@@ -319,7 +310,6 @@ function getCardStyle(kelas) {
 function render(data, q = "") {
     const container = document.getElementById("results");
     if (q.length === 0) { container.innerHTML = ""; return; }
-    
     container.innerHTML = "";
     data.forEach((item) => {
         const style = getCardStyle(item.kelas);
@@ -329,15 +319,18 @@ function render(data, q = "") {
         card.style.setProperty('--text-color', style.text);
         
         card.innerHTML = `
+            <div class="info-header">
+                <span class="info-tag">Madrasah Digital</span>
+                <div class="verified-badge">✓</div>
+            </div>
             <div><span class="badge-kelas">KELAS ${item.kelas}</span></div>
             <div class="mapel">${item.mapel}</div>
-            <div class="warning-text">⚠️ Periksa kembali identitas & teliti sebelum memilih.</div>
+            <div class="warning-text">⚠️ Periksa kembali identitas & teliti sebelum memulai tes ini.</div>
             <div class="action-label">
                 <span>MASUK KE TES</span>
-                <span style="font-size:20px">➔</span>
+                <span style="font-size:18px">➔</span>
             </div>
         `;
-        
         card.onclick = () => { if(item.link !== "#") window.location.href = item.link; };
         container.appendChild(card);
     });
