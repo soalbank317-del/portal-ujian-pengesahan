@@ -236,9 +236,9 @@ function updateClock() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     
-    // Menggunakan innerHTML agar kita bisa memasukkan tag span untuk mewarnai detik
+    // Jam, Menit, Detik, dan WIB sekarang satu ukuran (WIB tidak dikecilkan)
     document.getElementById('digital-clock').innerHTML = 
-        `${hours}:${minutes}:<span style="color: #facc15; text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);">${seconds}</span> <span style="font-size: 14px; margin-left: 5px;">WIB</span>`;
+        `${hours}:${minutes}:<span style="color: #facc15;">${seconds}</span> WIB`;
 
     const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
     const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
@@ -327,6 +327,7 @@ function render(data) {
 </script>
 </body>
 </html>
+
 
 
 
