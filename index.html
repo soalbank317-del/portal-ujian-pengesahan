@@ -4,28 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Tes Pengesahan KBM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-app: #31c157; 
             --white: #ffffff;
-            --text-dark: #1f2937;
+            --gray-100: #f3f4f6;
+            --text-dark: #111827;
             --text-muted: #6b7280;
-            --cls-7: #0891b2; 
-            --cls-8: #2563eb; 
-            --cls-9: #d97706; 
+            /* Warna Aksen Lebih Berani */
+            --cls-7: #06b6d4; /* Cyan */
+            --cls-8: #3b82f6; /* Blue */
+            --cls-9: #f59e0b; /* Amber */
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-app);
-            background-image: linear-gradient(135deg, #31c157 0%, #2bad4e 100%);
-            color: var(--white);
+            background-image: radial-gradient(circle at top right, #39da63, #2bad4e);
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: 30px 15px; /* Padding lebih kecil untuk HP */
+            padding: 40px 15px;
         }
 
         .container {
@@ -34,147 +35,158 @@
             text-align: center;
         }
 
-        /* LOGO */
-        .logo-wrapper { margin-bottom: 20px; }
+        /* LOGO FIX */
+        .logo-wrapper { margin-bottom: 25px; }
         .logo-madrasah {
-            width: 80px; /* Ukuran lebih proporsional */
-            height: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 3px solid white;
+            width: 110px;
+            height: 110px;
+            background: white; /* Latar belakang logo putih */
             border-radius: 50%;
             display: inline-block;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            animation: breathe 3s infinite ease-in-out;
+            padding: 10px; /* Jarak logo ke pinggir lingkaran */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            box-sizing: border-box;
         }
-
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(255, 255, 255, 0.5); }
+        .logo-madrasah img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Agar logo tidak gepeng */
         }
 
         h1 {
-            font-size: clamp(22px, 5vw, 42px);
-            margin: 10px 0;
+            font-size: clamp(26px, 6vw, 44px);
+            margin: 0;
             font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1.2;
+            color: white;
+            letter-spacing: -1.5px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .subtitle {
             font-weight: 600;
-            font-size: clamp(12px, 3vw, 14px);
-            letter-spacing: 2px;
+            font-size: 14px;
+            letter-spacing: 4px;
             color: rgba(255, 255, 255, 0.9);
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
-        /* SEARCH BOX RESPONSIVE */
+        /* SEARCH BOX */
         .search-box { 
-            margin: 0 auto 40px; 
-            max-width: 500px; 
-            position: sticky; 
-            top: 20px; 
-            z-index: 100;
+            margin: 0 auto 50px; 
+            max-width: 550px; 
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
         }
         .search-box input {
             width: 100%;
             background: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 12px;
+            border: 2px solid transparent;
+            padding: 18px 30px;
+            border-radius: 20px;
             color: var(--text-dark);
-            font-size: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             outline: none;
-            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        .search-box input:focus {
+            border-color: var(--white);
+            transform: scale(1.02);
         }
 
-        /* GRID RESULTS - Otomatis menyesuaikan jumlah kolom */
+        /* GRID RESULTS */
         .results {
             display: grid;
-            /* Mobile: 1 kolom, Tablet: 2 kolom, Desktop: 3 kolom */
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
 
-        /* CARD STYLE */
+        /* KARTU PROFESIONAL */
         .card {
             background: white;
-            border-radius: 18px;
-            padding: 25px;
+            border-radius: 24px;
+            padding: 30px;
             text-align: left;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.03);
             display: flex;
             flex-direction: column;
-            text-decoration: none;
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
 
-        .card .indicator {
-            width: 40px;
-            height: 4px;
-            border-radius: 10px;
+        /* Label Kelas Besar */
+        .card .kelas-badge {
             background: var(--accent-color);
-            margin-bottom: 15px;
-        }
-
-        .card .kelas-tag {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 5px;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 18px; /* Lebih Besar */
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .card .mapel {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 20px;
-            line-height: 1.4;
+            line-height: 1.3;
+            margin-bottom: 25px;
             flex-grow: 1;
         }
 
-        .card .btn-kerjakan {
-            background: #f3f4f6;
-            color: var(--text-dark);
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 13px;
+        .card .footer-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 15px;
+            border-top: 1px solid var(--gray-100);
+            color: var(--accent-color);
             font-weight: 700;
+            font-size: 14px;
         }
 
-        .card:hover .btn-kerjakan {
+        /* Dekorasi Lingkaran halus di kartu */
+        .card::after {
+            content: "";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
             background: var(--accent-color);
-            color: white;
+            opacity: 0.05;
+            border-radius: 50%;
         }
 
-        /* Info State */
         .info-msg {
             grid-column: 1/-1;
+            background: rgba(255, 255, 255, 0.15);
             padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
             font-weight: 600;
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        mark.hi { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; }
+        mark.hi { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 4px; }
 
-        /* Media Query untuk HP kecil */
-        @media (max-width: 480px) {
-            body { padding: 20px 10px; }
-            .card { padding: 20px; }
-            .results { grid-template-columns: 1fr; } /* Paksa 1 kolom di HP */
+        @media (max-width: 600px) {
+            .results { grid-template-columns: 1fr; }
+            h1 { font-size: 28px; }
         }
     </style>
 </head>
@@ -182,18 +194,20 @@
 
 <div class="container">
     <div class="logo-wrapper">
-        <div class="logo-madrasah"></div>
+        <div class="logo-madrasah">
+            <img src="https://i.ibb.co.com/1fHCTtJ5/logo.png" alt="Logo Madrasah">
+        </div>
     </div>
     
     <h1>Portal Tes Pengesahan</h1>
     <p class="subtitle">MTs Amtsilati - KBM Online</p>
 
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Ketik nama mata pelajaran..." autocomplete="off">
+        <input type="text" id="searchInput" placeholder="Cari Mata Pelajaran atau Kelas..." autocomplete="off">
     </div>
 
     <div id="results" class="results">
-        <div class="info-msg">Silakan ketik nama mata pelajaran untuk mulai mencari.</div>
+        <div class="info-msg">Silakan ketik nama pelajaran (contoh: IPA) untuk mulai.</div>
     </div>
 </div>
 
@@ -206,17 +220,13 @@ async function init() {
         const res = await fetch(CSV_URL);
         const text = await res.text();
         allData = parseCSV(text);
-    } catch (e) {
-        console.error("Gagal mengambil data CSV");
-    }
+    } catch (e) { console.error("Data error"); }
 }
 
 function parseCSV(text) {
     const lines = text.split(/\r?\n/);
-    if(lines.length < 2) return [];
     const headers = lines[0].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(h => h.trim().toLowerCase());
     const iK = headers.indexOf("kelas"), iM = headers.indexOf("mapel"), iL = headers.indexOf("link");
-    
     return lines.slice(1).filter(l => l.trim()).map(line => {
         const c = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g,'').trim());
         return { kelas: c[iK] || "", mapel: c[iM] || "", link: c[iL] || "#" };
@@ -224,24 +234,20 @@ function parseCSV(text) {
 }
 
 function getAccentColor(kelas) {
-    if(kelas.includes("7")) return "#0891b2"; 
-    if(kelas.includes("8")) return "#2563eb"; 
-    if(kelas.includes("9")) return "#d97706"; 
+    if(kelas.includes("7")) return "#06b6d4"; 
+    if(kelas.includes("8")) return "#3b82f6"; 
+    if(kelas.includes("9")) return "#f59e0b"; 
     return "#10b981";
 }
 
 function render(data, q = "") {
     const container = document.getElementById("results");
-    
-    // JIKA KOLOM PENCARIAN KOSONG
     if (q.length === 0) {
-        container.innerHTML = '<div class="info-msg">Silakan ketik nama mata pelajaran untuk mulai mencari.</div>';
+        container.innerHTML = '<div class="info-msg">Silakan ketik nama pelajaran (contoh: IPA) untuk mulai.</div>';
         return;
     }
-
-    // JIKA DATA TIDAK DITEMUKAN
     if (data.length === 0) {
-        container.innerHTML = '<div class="info-msg">Mata pelajaran tidak ditemukan. Coba kata kunci lain.</div>';
+        container.innerHTML = '<div class="info-msg">Maaf, mata pelajaran tidak ditemukan.</div>';
         return;
     }
 
@@ -253,10 +259,14 @@ function render(data, q = "") {
         card.style.setProperty('--accent-color', color);
         
         card.innerHTML = `
-            <div class="indicator"></div>
-            <span class="kelas-tag">KBM KELAS ${item.kelas}</span>
+            <div>
+                <span class="kelas-badge">KELAS ${item.kelas}</span>
+            </div>
             <div class="mapel">${item.mapel.replace(new RegExp(q, 'gi'), m => `<mark class="hi">${m}</mark>`)}</div>
-            <div class="btn-kerjakan">Mulai Tes ➔</div>
+            <div class="footer-action">
+                <span>KERJAKAN SEKARANG</span>
+                <span>➔</span>
+            </div>
         `;
         
         card.onclick = () => { if(item.link !== "#") window.open(item.link, '_blank'); };
