@@ -38,88 +38,80 @@
         }
 
         .logo-madrasah {
-            width: 110px;
-            height: 110px;
+            width: 100px;
+            height: 100px;
             background: white;
             border-radius: 50%;
             display: inline-block;
-            padding: 12px;
-            /* Efek Timbul Logo */
-            box-shadow: 
-                0 10px 20px rgba(0,0,0,0.2),
-                inset 0 -5px 10px rgba(0,0,0,0.1);
+            padding: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2), inset 0 -5px 10px rgba(0,0,0,0.1);
             border: 4px solid rgba(255, 255, 255, 0.4);
             margin-bottom: 15px;
         }
         .logo-madrasah img { width: 100%; height: 100%; object-fit: contain; }
 
         h1 {
-            font-size: clamp(28px, 6vw, 48px);
+            font-size: clamp(26px, 5vw, 42px);
             margin: 0;
             font-weight: 800;
             letter-spacing: -1.5px;
-            /* Efek Teks Timbul */
-            text-shadow: 
-                0 2px 0 #28a745,
-                0 4px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 0 #28a745, 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .subtitle {
             font-weight: 800;
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 4px;
             text-transform: uppercase;
-            margin: 10px 0 25px;
+            margin: 8px 0 20px;
         }
 
-        /* 3D DIGITAL CLOCK */
+        /* 3D DIGITAL CLOCK - DIPERKECIL */
         .clock-container {
-            background: rgba(255, 255, 255, 0.25); /* Lebih Solid */
+            background: rgba(255, 255, 255, 0.25);
             display: inline-block;
-            padding: 20px 40px;
-            border-radius: 25px;
+            padding: 10px 25px; /* Padding dikurangi */
+            border-radius: 18px;
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.4);
-            margin-bottom: 40px;
-            /* Efek Timbul 3D */
-            box-shadow: 
-                0 15px 35px rgba(0,0,0,0.2),
-                0 5px 0 rgba(255,255,255,0.3) inset,
-                -5px -5px 15px rgba(255,255,255,0.1) inset;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2), 0 4px 0 rgba(255,255,255,0.3) inset;
             transform: perspective(1000px) rotateX(5deg);
         }
         #digital-clock { 
-            font-size: clamp(24px, 5vw, 36px); 
+            font-size: 22px; /* Ukuran jam diperkecil */
             font-weight: 800; 
-            letter-spacing: 3px;
-            text-shadow: 0 3px 5px rgba(0,0,0,0.2);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        #digital-date { font-size: 13px; font-weight: 700; margin-top: 5px; opacity: 1; color: #fff; }
+        #digital-date { font-size: 11px; font-weight: 700; margin-top: 3px; opacity: 1; color: #fff; }
 
+        /* SEARCH BOX - DIPERBESAR */
         .search-box { 
             margin: 0 auto 50px; 
-            max-width: 550px; 
+            max-width: 700px; /* Lebar ditambah dari 550px ke 700px */
             position: sticky;
             top: 20px;
             z-index: 1000;
         }
-        .search-wrapper .icon { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); font-size: 22px; z-index: 10; }
+        .search-wrapper .icon { position: absolute; left: 30px; top: 50%; transform: translateY(-50%); font-size: 26px; z-index: 10; }
         .search-box input {
             width: 100%;
             background: rgba(255, 255, 255, 1);
             border: none;
-            padding: 20px 25px 20px 70px;
-            border-radius: 50px;
+            padding: 24px 30px 24px 80px; /* Padding dan font size diperbesar */
+            border-radius: 60px;
             color: #111827;
-            font-size: 18px;
+            font-size: 20px; /* Ukuran teks input diperbesar */
             font-weight: 600;
-            /* Efek Timbul Input */
-            box-shadow: 
-                0 15px 30px rgba(0,0,0,0.2),
-                inset 0 -4px 0 rgba(0,0,0,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25), inset 0 -4px 0 rgba(0,0,0,0.05);
             outline: none;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-sizing: border-box;
+        }
+        .search-box input:focus {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
 
         .results {
@@ -131,7 +123,7 @@
 
         /* 3D SOLID GLASS CARD */
         .card {
-            background: rgba(255, 255, 255, 0.4); /* Tingkat warna solid ditambah */
+            background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.5);
@@ -144,21 +136,14 @@
             flex-direction: column;
             position: relative;
             overflow: hidden;
-            /* Efek Timbul 3D Layered */
-            box-shadow: 
-                0 20px 40px rgba(0,0,0,0.2),
-                0 8px 0 rgba(0,0,0,0.1),
-                inset 0 2px 0 rgba(255,255,255,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 8px 0 rgba(0,0,0,0.1), inset 0 2px 0 rgba(255,255,255,0.4);
         }
 
         .card:hover {
             transform: translateY(-15px) scale(1.03);
             background: rgba(255, 255, 255, 0.55);
             border-color: var(--accent-color);
-            box-shadow: 
-                0 30px 60px rgba(0,0,0,0.3),
-                0 10px 0 var(--accent-color),
-                0 0 20px var(--accent-color);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 10px 0 var(--accent-color), 0 0 20px var(--accent-color);
         }
 
         .card .badge-kelas {
@@ -170,10 +155,7 @@
             font-weight: 900;
             display: inline-block;
             margin-bottom: 20px;
-            /* Badge Timbul */
-            box-shadow: 
-                0 6px 0 rgba(0,0,0,0.15),
-                0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 0 rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .card .mapel {
@@ -228,6 +210,8 @@
 
         @media (max-width: 600px) {
             .results { grid-template-columns: 1fr; }
+            .search-box input { font-size: 16px; padding-left: 60px; }
+            .search-wrapper .icon { font-size: 20px; left: 20px; }
         }
     </style>
 </head>
@@ -249,7 +233,7 @@
         <div class="search-box">
             <div class="search-wrapper">
                 <span class="icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Cari nama mata pelajaran..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="Ketik nama mata pelajaran atau kelas..." autocomplete="off">
             </div>
         </div>
 
