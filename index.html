@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PORTAL TES PENGESAHAN</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -15,218 +15,171 @@
             --verified-purple: #9b59b6;
         }
 
-        body {
+        /* FULL SCREEN LOCK */
+        html, body {
+            height: 100%;
             margin: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
             background-color: var(--bg-app);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-image: linear-gradient(135deg, #00AA5B 0%, #008f4d 100%);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
             color: var(--white);
         }
 
-        /* MASKOT ROBOT 3D */
+        /* ROBOT 3D AI */
         .corner-robot {
             position: fixed;
             bottom: 60px;
-            right: 20px;
-            width: 120px;
+            right: 15px;
+            width: 100px;
             z-index: 999;
             pointer-events: none;
             animation: floatRobot 4s ease-in-out infinite;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2));
         }
-
         @keyframes floatRobot {
             0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
 
-        .container {
-            width: 100%;
-            max-width: 1100px;
-            text-align: center;
-            flex: 1;
-            margin: 0 auto;
-            padding: 30px 15px;
+        /* HEADER CENTERED */
+        header {
+            flex: 1; /* Mengambil ruang tengah saat belum ada pencarian */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* LOGO MADRASAH EFEK 3D */
+        /* Header mengecil ke atas saat mulai mencari */
+        body.searching header {
+            flex: 0;
+            padding: 20px 15px 10px;
+            justify-content: flex-start;
+        }
+
         .logo-madrasah {
             width: 100px;
             height: 100px;
             background: #ffffff;
             border-radius: 50%;
-            display: inline-block;
             padding: 12px;
-            box-shadow: 
-                0 10px 20px rgba(0,0,0,0.2), 
-                0 4px 0 #d1d1d1,
-                inset 0 -4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 5px 0 #d1d1d1;
             border: 4px solid rgba(255, 255, 255, 0.5);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             transform: perspective(500px) rotateX(10deg);
         }
         .logo-madrasah img { width: 100%; height: 100%; object-fit: contain; }
 
-        /* TULISAN JUDUL EFEK 3D TEBAL */
         h1 {
             font-size: clamp(24px, 6vw, 42px);
             margin: 0;
             font-weight: 800;
-            letter-spacing: 1px;
-            color: #ffffff;
-            /* Efek Kedalaman 3D pada Teks */
-            text-shadow: 
-                0 1px 0 #cccccc, 
-                0 2px 0 #c5c5c5, 
-                0 3px 0 #bbbbbb, 
-                0 4px 0 #b1b1b1, 
-                0 5px 0 #aaaaaa, 
-                0 6px 1px rgba(0,0,0,.1), 
-                0 0 5px rgba(0,0,0,.1), 
-                0 1px 3px rgba(0,0,0,.3), 
-                0 3px 5px rgba(0,0,0,.2), 
-                0 5px 10px rgba(0,0,0,.25), 
-                0 10px 10px rgba(0,0,0,.2), 
-                0 20px 20px rgba(0,0,0,.15);
-            transform: translateY(-5px);
+            text-align: center;
+            text-shadow: 0 1px 0 #ccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 6px 15px rgba(0,0,0,.3);
         }
 
-        .subtitle {
-            font-weight: 800;
-            font-size: 12px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin: 15px 0 20px;
-            opacity: 1;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        /* CLOCK 3D MINIMALIS */
         .clock-container {
             background: rgba(255, 255, 255, 0.25);
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 12px;
+            padding: 10px 25px;
+            border-radius: 15px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            margin-bottom: 30px;
+            margin: 20px 0;
             box-shadow: 0 8px 15px rgba(0,0,0,0.1), 0 4px 0 rgba(255,255,255,0.2) inset;
             transform: perspective(1000px) rotateX(10deg);
         }
-        #digital-clock { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
-        #digital-date { font-size: 10px; font-weight: 700; margin-top: 2px; }
+        #digital-clock { font-size: 24px; font-weight: 800; }
+        #digital-date { font-size: 11px; font-weight: 700; margin-top: 3px; }
 
-        /* SEARCH BOX */
         .search-box { 
-            margin: 0 auto 40px; 
-            max-width: 750px; 
-            position: sticky;
-            top: 20px;
-            z-index: 1000;
+            width: 90%;
+            max-width: 700px;
+            margin-top: 20px;
         }
-        .search-wrapper .icon { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); font-size: 26px; z-index: 10; color: #00AA5B; }
+        .search-wrapper { position: relative; display: flex; align-items: center; }
+        .search-wrapper .icon { position: absolute; left: 25px; font-size: 24px; color: #00AA5B; }
         .search-box input {
             width: 100%;
             background: #ffffff;
             border: none;
-            padding: 22px 30px 22px 80px;
+            padding: 22px 30px 22px 75px;
             border-radius: 60px;
             color: #111827;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             outline: none;
-            box-sizing: border-box;
-            transition: 0.3s;
         }
+
+        /* SCROLLABLE CONTENT */
+        main {
+            flex: 2;
+            overflow-y: auto;
+            padding: 0 15px 30px;
+            display: none; /* Sembunyikan sampai user mengetik */
+            -webkit-overflow-scrolling: touch;
+        }
+        body.searching main { display: flex; justify-content: center; }
 
         .results {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
-            padding-bottom: 40px;
+            width: 100%;
+            max-width: 1100px;
+            align-content: start;
         }
 
-        /* CARD SEMI-GLOSSY */
+        /* 3D SOLID CARD */
         .card {
-            background: rgba(255, 255, 255, 0.95);
+            background: #ffffff;
             border-radius: 28px;
             padding: 30px;
-            text-align: left;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            position: relative;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 0 #e0e0e0;
             border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #111827;
         }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: #ffffff;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2), 0 6px 0 var(--accent-color);
-            border-color: var(--accent-color);
-        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.2), 0 6px 0 var(--accent-color); }
 
         .info-header { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
-        .info-tag { font-size: 11px; font-weight: 800; color: #111827; text-transform: uppercase; }
-        .verified-badge {
-            background: var(--verified-purple);
-            color: white;
-            width: 18px; height: 18px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: bold;
-        }
+        .info-tag { font-size: 11px; font-weight: 800; color: #4b5563; text-transform: uppercase; }
+        .verified-badge { background: var(--verified-purple); color: white; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
 
         .card .badge-kelas {
             background: var(--accent-color);
             color: var(--text-color, white); 
-            padding: 10px 22px;
+            padding: 10px 20px;
             border-radius: 15px;
             font-size: 22px;
             font-weight: 900;
             display: inline-block;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
+        .card .mapel { font-size: 22px; font-weight: 800; margin-bottom: 15px; line-height: 1.2; }
+        .card .warning-text { font-size: 12px; font-weight: 700; background: #f3f4f6; padding: 10px; border-radius: 10px; margin-bottom: 20px; }
 
-        .card .mapel { font-size: 22px; font-weight: 800; color: #111827; line-height: 1.3; margin-bottom: 15px; flex-grow: 1; }
-
-        .card .warning-text {
-            font-size: 12px;
-            font-weight: 700;
-            color: #111827;
-            background: rgba(0,0,0,0.05);
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .card .action-label {
-            font-weight: 800; font-size: 14px; color: var(--accent-color);
-            padding-top: 15px; border-top: 2px solid rgba(0,0,0,0.05);
-            display: flex; justify-content: space-between;
-        }
-
+        /* FIXED FOOTER */
         footer {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 15px;
             text-align: center;
-            margin-top: auto;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
         }
-        .footer-text { font-size: 14px; font-weight: 800; color: var(--white); margin-bottom: 5px; }
-        .footer-copy { font-size: 11px; font-weight: 600; opacity: 0.6; }
+        .footer-text { font-size: 14px; font-weight: 800; }
 
         @media (max-width: 600px) {
             .results { grid-template-columns: 1fr; }
-            .corner-robot { width: 80px; bottom: 80px; }
+            .logo-madrasah { width: 80px; height: 80px; }
         }
     </style>
 </head>
@@ -234,49 +187,63 @@
 
     <img src="https://i.ibb.co.com/mVzkz5xG/robot-removebg-preview.png" class="corner-robot" alt="AI Robot">
 
-    <div class="container">
+    <header id="appHeader">
         <div class="logo-madrasah">
             <img src="https://i.ibb.co.com/1fHCTtJ5/logo.png" alt="Logo">
         </div>
-        
         <h1>PORTAL TES PENGESAHAN</h1>
-        <p class="subtitle">MTs Amtsilati - KBM Online</p>
-
         <div class="clock-container">
             <div id="digital-clock">00:00:00</div>
             <div id="digital-date">Memuat Tanggal...</div>
         </div>
-
         <div class="search-box">
             <div class="search-wrapper">
                 <span class="icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Cari Mata Pelajaran atau Kelas..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="Ketik mata pelajaran..." autocomplete="off">
             </div>
         </div>
+    </header>
 
+    <main id="appMain">
         <div id="results" class="results"></div>
-    </div>
+    </main>
 
     <footer>
-        <div class="footer-text">MTs AMTSILATI</div>
-        <div class="footer-copy">
-            &copy; 2026 MTs Amtsilati. Dikembangkan dengan ❤️ untuk Siswa Madrasah.
-        </div>
+        <div class="footer-text">MTs AMTSILATI &copy; 2026</div>
     </footer>
 
 <script>
+const searchInput = document.getElementById('searchInput');
+const body = document.body;
+
+// 1. FUNGSI UPDATE JAM
 function updateClock() {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
-    document.getElementById('digital-clock').textContent = `${hours}:${minutes}:${seconds} WIB`;
+    document.getElementById('digital-clock').textContent = `${hours}:${seconds % 2 === 0 ? ':' : ' '}${minutes}:${seconds} WIB`;
     const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
     const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     document.getElementById('digital-date').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
 }
 setInterval(updateClock, 1000); updateClock();
 
+// 2. AUTO RESET KETIKA PINDAH TAB (Visibility API)
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+        // Saat user keluar tab, langsung hapus isian
+        resetSearch();
+    }
+});
+
+function resetSearch() {
+    searchInput.value = '';
+    body.classList.remove('searching');
+    document.getElementById('results').innerHTML = '';
+}
+
+// 3. LOGIKA PENCARIAN & LAYOUT
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
 let allData = [];
 
@@ -306,9 +273,19 @@ function getCardStyle(kelas) {
     return { accent: "#00AA5B", text: "white" };
 }
 
-function render(data, q = "") {
-    const container = document.getElementById("results");
-    if (q.length === 0) { container.innerHTML = ""; return; }
+searchInput.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    if (q.length > 0) {
+        body.classList.add('searching');
+        const filtered = allData.filter(d => d.mapel.toLowerCase().includes(q) || d.kelas.toLowerCase().includes(q));
+        render(filtered);
+    } else {
+        body.classList.remove('searching');
+    }
+});
+
+function render(data) {
+    const container = document.getElementById('results');
     container.innerHTML = "";
     data.forEach((item) => {
         const style = getCardStyle(item.kelas);
@@ -316,30 +293,17 @@ function render(data, q = "") {
         card.className = "card";
         card.style.setProperty('--accent-color', style.accent);
         card.style.setProperty('--text-color', style.text);
-        
         card.innerHTML = `
-            <div class="info-header">
-                <span class="info-tag">Madrasah Digital</span>
-                <div class="verified-badge">✓</div>
-            </div>
+            <div class="info-header"><span class="info-tag">Madrasah Digital</span><div class="verified-badge">✓</div></div>
             <div><span class="badge-kelas">KELAS ${item.kelas}</span></div>
             <div class="mapel">${item.mapel}</div>
-            <div class="warning-text">⚠️ Periksa kembali identitas & teliti sebelum mulai tes.</div>
-            <div class="action-label">
-                <span>MASUK SEKARANG</span>
-                <span style="font-size:18px">➔</span>
-            </div>
+            <div class="warning-text">⚠️ Periksa kembali identitas & teliti.</div>
+            <div style="font-weight:800; color:var(--accent-color); text-align:right">MULAI ➔</div>
         `;
         card.onclick = () => { if(item.link !== "#") window.location.href = item.link; };
         container.appendChild(card);
     });
 }
-
-document.getElementById("searchInput").addEventListener("input", (e) => {
-    const q = e.target.value.toLowerCase().trim();
-    const filtered = allData.filter(d => d.mapel.toLowerCase().includes(q) || d.kelas.toLowerCase().includes(q));
-    render(filtered, q);
-});
 
 init();
 </script>
