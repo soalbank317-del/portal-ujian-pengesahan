@@ -43,7 +43,7 @@
         header {
             text-align: center;
             padding: 40px 0 10px;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             flex-shrink: 0;
         }
 
@@ -59,7 +59,7 @@
             border: 4px solid rgba(255, 255, 255, 0.5);
             display: inline-block;
             transform: perspective(500px) rotateX(10deg);
-            transition: 0.4s;
+            transition: 0.5s;
         }
         .logo-madrasah img { width: 100%; height: 100%; object-fit: contain; }
 
@@ -72,7 +72,7 @@
             text-shadow: 
                 0 1px 0 #cccccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbbbbb, 0 4px 0 #b1b1b1, 
                 0 5px 0 #aaaaaa, 0 6px 1px rgba(0,0,0,.1), 0 10px 10px rgba(0,0,0,.2);
-            transition: 0.4s;
+            transition: 0.5s;
         }
 
         /* JAM 3D */
@@ -84,40 +84,37 @@
             margin-bottom: 20px;
             box-shadow: 0 8px 15px rgba(0,0,0,0.1), 0 4px 0 rgba(255,255,255,0.2) inset;
             transform: perspective(1000px) rotateX(10deg);
-            transition: 0.4s;
+            transition: 0.5s;
         }
         #digital-clock { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
 
-        /* ANIMASI GESER KE ATAS SAAT FOKUS/MENCARI */
+        /* LOGIKAL SLIDE UP: KETIKA FOKUS / SEARCHING */
         body.searching header {
-            padding-top: 10px;
-        }
-        body.searching .logo-madrasah, 
-        body.searching h1, 
-        body.searching .clock-container {
-            transform: scale(0);
-            height: 0;
-            margin: 0;
+            margin-top: -300px; /* Tarik paksa ke atas */
             opacity: 0;
+            padding: 0;
             pointer-events: none;
-            overflow: hidden;
         }
 
         /* SEARCH BOX SUPER BESAR */
         .search-container {
-            padding: 10px 20px;
+            padding: 20px;
             flex-shrink: 0;
             z-index: 1001;
+            transition: all 0.5s ease;
+        }
+        body.searching .search-container {
+            padding-top: 10px;
         }
         .search-wrapper {
             position: relative;
-            max-width: 800px; /* Diperbesar */
+            max-width: 800px;
             margin: 0 auto;
         }
-        .search-wrapper .icon { position: absolute; left: 30px; top: 50%; transform: translateY(-50%); font-size: 28px; color: #00AA5B; transition: 0.3s; }
+        .search-wrapper .icon { position: absolute; left: 30px; top: 50%; transform: translateY(-50%); font-size: 28px; color: #00AA5B; }
         input {
             width: 100%;
-            padding: 25px 30px 25px 85px; /* Lebih besar */
+            padding: 25px 30px 25px 85px;
             border-radius: 60px;
             border: none;
             font-size: 20px;
@@ -127,15 +124,21 @@
             box-sizing: border-box;
             transition: 0.3s;
         }
-        input:focus { transform: scale(1.02); }
 
-        /* MAIN SCROLL AREA */
+        /* MAIN AREA SCROLL */
         main {
             flex: 1;
             overflow-y: auto;
-            padding: 10px 20px 80px;
+            padding: 0 20px 80px;
             display: flex;
             justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.5s;
+        }
+        body.searching main {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .results {
@@ -147,7 +150,6 @@
             align-content: start;
         }
 
-        /* CARD 3D SOLID */
         .card {
             background: #ffffff;
             color: #111;
@@ -155,12 +157,12 @@
             padding: 25px;
             box-shadow: 0 10px 0 #e0e0e0, 0 15px 30px rgba(0,0,0,0.1);
             cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
         }
         .card:hover { transform: translateY(-10px); box-shadow: 0 10px 0 var(--accent-color), 0 20px 40px rgba(0,0,0,0.2); }
 
         .verified-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 11px; font-weight: 800; color: #4b5563; text-transform: uppercase; }
-        .v-icon { background: var(--verified-purple); color: #fff; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 10px; box-shadow: 0 2px 4px rgba(155, 89, 182, 0.4); }
+        .v-icon { background: var(--verified-purple); color: #fff; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 10px; }
 
         .badge-kelas {
             background: var(--accent-color);
@@ -171,10 +173,8 @@
             font-size: 20px;
             margin-bottom: 15px;
             display: inline-block;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
         }
-        .mapel { font-size: 22px; font-weight: 800; margin-bottom: 15px; line-height: 1.2; }
-        .warning-text { font-size: 12px; font-weight: 700; color: #666; background: #f3f4f6; padding: 10px; border-radius: 10px; }
+        .mapel { font-size: 22px; font-weight: 800; margin-bottom: 15px; }
 
         footer {
             position: fixed;
@@ -185,13 +185,11 @@
             text-align: center;
             font-size: 12px;
             z-index: 100;
-            backdrop-filter: blur(5px);
         }
 
         @media (max-width: 600px) {
             .results { grid-template-columns: 1fr; }
             input { font-size: 17px; padding-left: 70px; }
-            .search-wrapper .icon { font-size: 22px; left: 25px; }
         }
     </style>
 </head>
@@ -221,7 +219,7 @@
     </main>
 
     <footer>
-        MTs AMTSILATI &copy; 2026 - Dikembangkan dengan ❤️ untuk Siswa
+        MTs AMTSILATI &copy; 2026 - Dikembangkan dengan ❤️
     </footer>
 
 <script>
@@ -235,22 +233,33 @@ function updateClock() {
 }
 setInterval(updateClock, 1000); updateClock();
 
-// 2. AUTO RESET & SLIDE DOWN SAAT PINDAH TAB
+// 2. AUTO RESET KETIKA PINDAH TAB
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
-        searchInput.value = '';
-        body.classList.remove('searching');
-        document.getElementById('results').innerHTML = '';
-        searchInput.blur(); // Lepas fokus kursor
+        clearAndReset();
     }
 });
 
-// 3. EVENT FOKUS KURSOR (SLIDE UP OTOMATIS)
+// 3. FUNGSI RESET TOTAL
+function clearAndReset() {
+    searchInput.value = '';
+    body.classList.remove('searching');
+    document.getElementById('results').innerHTML = '';
+    searchInput.blur();
+}
+
+// 4. LOGIKA PENCARIAN & EVENT FOCUS/BLUR
 searchInput.addEventListener('focus', () => {
     body.classList.add('searching');
 });
 
-// 4. DATA DARI SPREADSHEET
+// LOGIKA BARU: Jika kursor keluar DAN input kosong, turunkan lagi header
+searchInput.addEventListener('blur', () => {
+    if (searchInput.value === "") {
+        body.classList.remove('searching');
+    }
+});
+
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
 let allData = [];
 
@@ -265,11 +274,9 @@ fetch(CSV_URL).then(res => res.text()).then(text => {
 searchInput.addEventListener('input', (e) => {
     const q = e.target.value.toLowerCase().trim();
     if (q.length > 0) {
+        body.classList.add('searching');
         const filtered = allData.filter(d => d.mapel.toLowerCase().includes(q) || d.kelas.toLowerCase().includes(q));
         render(filtered);
-    } else {
-        // Jika teks dihapus tapi kursor masih disitu, tetap slide up
-        document.getElementById('results').innerHTML = '';
     }
 });
 
@@ -290,7 +297,7 @@ function render(data) {
             <div class="verified-header"><span>Madrasah Digital</span><div class="v-icon">✓</div></div>
             <div class="badge-kelas">KELAS ${item.kelas}</div>
             <div class="mapel">${item.mapel}</div>
-            <div class="warning-text">⚠️ Periksa kembali identitas sebelum mulai tes.</div>
+            <div style="font-size:12px; font-weight:700; color:#00AA5B; text-align:right;">MULAI TES ➔</div>
         `;
         card.onclick = () => { if(item.link !== "#") window.location.href = item.link; };
         container.appendChild(card);
