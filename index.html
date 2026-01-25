@@ -3,38 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Tes Pengesahan KBM</title>
+    <title>PORTAL TES PENGESAHAN KBM</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-app: #31c157; 
             --white: #ffffff;
-            --cls-7: #2563eb; /* Biru */
-            --cls-8: #facc15; /* Kuning */
-            --cls-9: #dc2626; /* Merah */
+            /* Warna Aksen Kelas */
+            --cls-7: #2563eb; 
+            --cls-8: #facc15; 
+            --cls-9: #dc2626; 
         }
 
         body {
             margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-app);
-            background-image: radial-gradient(circle at top right, #39da63, #2bad4e);
+            background-image: 
+                radial-gradient(circle at 20% 20%, #39da63 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, #2bad4e 0%, transparent 40%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            color: var(--white);
         }
 
         /* MASKOT POJOK */
         .corner-mascot {
             position: fixed;
-            bottom: 80px;
+            bottom: 100px;
             right: 20px;
-            width: 100px;
+            width: 90px;
             z-index: 999;
             pointer-events: none;
             animation: floatMascot 4s ease-in-out infinite;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
         }
         @keyframes floatMascot {
             0%, 100% { transform: translateY(0) rotate(-3deg); }
@@ -51,61 +55,47 @@
         }
 
         .logo-madrasah {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             background: white;
             border-radius: 50%;
             display: inline-block;
-            padding: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             border: 4px solid rgba(255, 255, 255, 0.4);
             margin-bottom: 15px;
         }
         .logo-madrasah img { width: 100%; height: 100%; object-fit: contain; }
 
         h1 {
-            font-size: clamp(26px, 6vw, 44px);
+            font-size: clamp(28px, 6vw, 48px);
             margin: 0;
             font-weight: 800;
-            color: var(--white);
+            letter-spacing: -1.5px;
             text-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            letter-spacing: -1px;
         }
 
         .subtitle {
             font-weight: 800;
             font-size: 14px;
-            letter-spacing: 3px;
-            color: var(--white);
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin: 5px 0 20px;
+            margin: 10px 0 25px;
         }
 
-        /* CLOCK DIGITAL DETAIL */
+        /* CLOCK GLASS STYLE */
         .clock-container {
-            background: rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             display: inline-block;
-            padding: 15px 30px;
+            padding: 15px 35px;
             border-radius: 20px;
-            color: white;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        #digital-clock {
-            font-size: 32px;
-            font-weight: 800;
-            margin: 0;
-            letter-spacing: 2px;
-        }
-        #digital-date {
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
+        #digital-clock { font-size: 32px; font-weight: 800; letter-spacing: 2px; }
+        #digital-date { font-size: 13px; font-weight: 700; margin-top: 5px; opacity: 0.9; }
 
         /* SEARCH BOX */
         .search-box { 
@@ -116,73 +106,125 @@
             z-index: 1000;
         }
         .search-wrapper { position: relative; display: flex; align-items: center; }
-        .search-wrapper .icon { position: absolute; left: 25px; font-size: 20px; }
+        .search-wrapper .icon { position: absolute; left: 25px; font-size: 22px; z-index: 10; }
         .search-box input {
             width: 100%;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border: none;
-            padding: 20px 25px 20px 65px;
+            padding: 20px 25px 20px 70px;
             border-radius: 50px;
             color: #111827;
             font-size: 18px;
             font-weight: 600;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             outline: none;
+            transition: 0.3s;
         }
+        .search-box input:focus { background: #fff; transform: scale(1.02); }
 
-        /* RESULTS */
+        /* GRID RESULTS */
         .results {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
+            padding-bottom: 50px;
         }
+
+        /* CARD SEMI-TRANSPARENT (GLOSSY) */
         .card {
-            background: white;
-            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.15); /* Transparan */
+            backdrop-filter: blur(20px); /* Efek Kaca */
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
             padding: 35px;
             text-align: left;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            animation: popIn 0.5s ease backwards;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+
+        /* Efek Glossy / Cahaya di kartu */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            transform: rotate(30deg);
+            transition: 0.5s;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: var(--accent-color);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3), 0 0 20px var(--accent-color);
+        }
+
+        /* Badge Kelas Tetap Kontras */
         .card .badge-kelas {
             background: var(--accent-color);
             color: var(--text-color, white); 
-            padding: 10px 25px;
-            border-radius: 15px;
+            padding: 12px 25px;
+            border-radius: 18px;
             font-size: 26px;
-            font-weight: 800;
+            font-weight: 900;
             display: inline-block;
             margin-bottom: 25px;
-        }
-        .card .mapel { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 30px; flex-grow: 1; }
-        .card .action-label {
-            font-weight: 800; font-size: 13px; color: var(--accent-color);
-            padding-top: 20px; border-top: 2px solid #f3f4f6; display: flex; justify-content: space-between;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            text-transform: uppercase;
         }
 
-        /* FOOTER */
+        .card .mapel {
+            font-size: 26px;
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            flex-grow: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Info tambahan di dalam kartu agar menarik */
+        .card .info-tag {
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(0,0,0,0.2);
+            padding: 5px 12px;
+            border-radius: 50px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .card .action-label {
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--accent-color);
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         footer {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
             padding: 40px 20px;
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            margin-top: auto;
         }
-        .footer-text { font-size: 15px; font-weight: 800; letter-spacing: 0.5px; }
 
-        mark.hi { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 4px; }
+        .footer-text { font-size: 15px; font-weight: 800; }
 
         @media (max-width: 600px) {
-            .corner-mascot { width: 70px; bottom: 90px; }
-            .clock-container { padding: 10px 20px; }
-            #digital-clock { font-size: 24px; }
+            .results { grid-template-columns: 1fr; }
+            #digital-clock { font-size: 26px; }
         }
     </style>
 </head>
@@ -195,7 +237,7 @@
             <img src="https://i.ibb.co.com/1fHCTtJ5/logo.png" alt="Logo">
         </div>
         
-        <h1>Portal Tes Pengesahan</h1>
+        <h1>PORTAL TES PENGESAHAN KBM</h1>
         <p class="subtitle">MTs Amtsilati - KBM Online</p>
 
         <div class="clock-container">
@@ -206,7 +248,7 @@
         <div class="search-box">
             <div class="search-wrapper">
                 <span class="icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Cari mata pelajaran..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="Ketik mata pelajaran..." autocomplete="off">
             </div>
         </div>
 
@@ -220,31 +262,21 @@
     </footer>
 
 <script>
-// --- KONFIGURASI JAM DIGITAL ---
+// --- JAM DIGITAL ---
 function updateClock() {
     const now = new Date();
-    
-    // Format Waktu
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     document.getElementById('digital-clock').textContent = `${hours}:${minutes}:${seconds} WIB`;
 
-    // Format Tanggal Lengkap
     const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
     const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-    
-    const dayName = days[now.getDay()];
-    const date = now.getDate();
-    const monthName = months[now.getMonth()];
-    const year = now.getFullYear();
-    
-    document.getElementById('digital-date').textContent = `${dayName}, ${date} ${monthName} ${year}`;
+    document.getElementById('digital-date').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
 }
-setInterval(updateClock, 1000);
-updateClock();
+setInterval(updateClock, 1000); updateClock();
 
-// --- DATA & PENCARIAN ---
+// --- SEARCH & RENDER ---
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
 let allData = [];
 
@@ -253,7 +285,7 @@ async function init() {
         const res = await fetch(CSV_URL);
         const text = await res.text();
         allData = parseCSV(text);
-    } catch (e) { console.error("Gagal ambil data"); }
+    } catch (e) { console.error("CSV Error"); }
 }
 
 function parseCSV(text) {
@@ -270,17 +302,13 @@ function getCardStyle(kelas) {
     if(kelas.includes("7")) return { accent: "#2563eb", text: "white" }; 
     if(kelas.includes("8")) return { accent: "#facc15", text: "#854d0e" }; 
     if(kelas.includes("9")) return { accent: "#dc2626", text: "white" }; 
-    return { accent: "#10b981", text: "white" };
+    return { accent: "#fff", text: "#111" };
 }
 
 function render(data, q = "") {
     const container = document.getElementById("results");
     if (q.length === 0) { container.innerHTML = ""; return; }
-    if (data.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; padding: 50px; font-weight: 800; color: white;">😢 Tidak ditemukan.</div>';
-        return;
-    }
-
+    
     container.innerHTML = "";
     data.forEach((item, index) => {
         const style = getCardStyle(item.kelas);
@@ -288,20 +316,18 @@ function render(data, q = "") {
         card.className = "card";
         card.style.setProperty('--accent-color', style.accent);
         card.style.setProperty('--text-color', style.text);
-        card.style.animationDelay = (index * 0.03) + "s";
         
         card.innerHTML = `
+            <div class="info-tag">MADRASAH DIGITAL</div>
             <div><span class="badge-kelas">KELAS ${item.kelas}</span></div>
-            <div class="mapel">${item.mapel.replace(new RegExp(q, 'gi'), m => `<mark class="hi">${m}</mark>`)}</div>
-            <div class="action-label"><span>MULAI TES</span><span>➔</span></div>
+            <div class="mapel">${item.mapel}</div>
+            <div class="action-label">
+                <span>KLIK UNTUK MENGERJAKAN</span>
+                <span style="font-size:20px">➔</span>
+            </div>
         `;
         
-        // --- LOGIKA BUKA DI TAB YANG SAMA ---
-        card.onclick = () => { 
-            if(item.link !== "#") {
-                window.location.href = item.link; 
-            }
-        };
+        card.onclick = () => { if(item.link !== "#") window.location.href = item.link; };
         container.appendChild(card);
     });
 }
