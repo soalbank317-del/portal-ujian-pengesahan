@@ -1,258 +1,261 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Tes Pengesahan</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-    --bg-body: #050c0a;       /* Hitam Hijau Pekat */
-    --bg-card: #0d1f1a;       /* Hijau Gelap untuk Kartu */
-    --primary-glow: #2d6a4f;  /* Hijau Glow */
-    --accent-gold: #d4af37;   /* Emas untuk detail */
-    --text-light: #e0e0e0;    /* Abu terang untuk teks */
-    --text-white: #ffffff;    /* Putih murni untuk judul */
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Tes Pengesahan KBM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #020a06; /* Hitam Hijau Pekat */
+            --primary: #31c157; /* Warna utama Madrasah */
+            --text-white: #ffffff;
+            --text-gray: #a0aec0;
+            /* Warna Kontras Per Tingkatan */
+            --cls-7: #00f5ff; /* Cyan / Turquoise */
+            --cls-8: #3b82f6; /* Electric Blue */
+            --cls-9: #fbbf24; /* Amber / Sunset Orange */
+        }
 
-body {
-    margin: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--bg-body);
-    color: var(--text-light);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-}
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(49, 193, 87, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 245, 255, 0.05) 0%, transparent 40%);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
 
-.container {
-    width: 100%;
-    max-width: 900px;
-    text-align: center;
-}
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+        }
 
-h1 {
-    margin: 0;
-    font-size: 36px;
-    color: var(--text-white);
-    font-weight: 800;
-    letter-spacing: -1px;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
+        /* LOGO MADRASAH BERSINAR */
+        .logo-wrapper { margin-bottom: 25px; }
+        .logo-madrasah {
+            width: 110px;
+            height: 110px;
+            background: var(--primary); /* Ganti dengan <img src="https://i.ibb.co.com/1fHCTtJ5/logo.png"> jika ada */
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            box-shadow: 0 0 40px rgba(49, 193, 87, 0.5);
+            animation: breathe 3s infinite ease-in-out;
+        }
 
-.subtitle {
-    margin: 10px 0 40px;
-    color: var(--accent-gold);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(49, 193, 87, 0.4); }
+            50% { transform: scale(1.08); box-shadow: 0 0 60px rgba(49, 193, 87, 0.8); }
+        }
 
-/* SEARCH BOX DARK */
-.search-box {
-    max-width: 500px;
-    margin: 0 auto 50px;
-}
+        /* JUDUL TIMBUL (3D LAYERED) */
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(34px, 7vw, 60px);
+            margin: 0;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            color: #ffffff;
+            text-shadow: 
+                0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 
+                0 10px 20px rgba(0,0,0,0.4), 0 0 15px rgba(255,255,255,0.1);
+        }
 
-.search-box input {
-    width: 100%;
-    padding: 18px 25px;
-    font-size: 16px;
-    border-radius: 12px;
-    border: 1px solid #1a332c;
-    background: #0a1411;
-    outline: none;
-    transition: all 0.3s ease;
-    color: var(--text-white);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-}
+        .subtitle {
+            margin-top: 20px;
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: 5px;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
 
-.search-box input:focus {
-    border-color: var(--primary-glow);
-    box-shadow: 0 0 15px rgba(45, 106, 79, 0.3);
-    background: #0d1f1a;
-}
+        /* SEARCH BOX MODERN */
+        .search-box { margin: 50px auto; max-width: 600px; }
+        .search-box input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(49, 193, 87, 0.3);
+            padding: 22px 35px;
+            border-radius: 60px;
+            color: white;
+            font-size: 18px;
+            outline: none;
+            transition: 0.4s;
+            backdrop-filter: blur(12px);
+            box-sizing: border-box;
+        }
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(49, 193, 87, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-/* RESULTS GRID */
-.results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-}
+        /* GRID RESULTS */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 25px;
+        }
 
-/* CARD DARK ELEGANT */
-.card {
-    background: var(--bg-card);
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid #1a332c;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    position: relative;
-    opacity: 0;
-    transform: translateY(20px);
-}
+        /* CARD DENGAN KONTRAS TINGGI */
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 35px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transform: translateY(30px);
+        }
 
-.card.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+        .card.show { opacity: 1; transform: translateY(0); }
 
-.card:hover {
-    transform: translateY(-8px);
-    background: #132a22;
-    border-color: var(--primary-glow);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 10px rgba(45, 106, 79, 0.2);
-}
+        /* Aksen Samping sesuai Warna Kelas */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 8px; height: 100%;
+            background: var(--accent-color);
+            box-shadow: 2px 0 15px var(--accent-color);
+        }
 
-.card .kelas {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--accent-gold);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 10px;
-}
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-color);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px var(--accent-color);
+        }
 
-.card .mapel {
-    font-weight: 700;
-    font-size: 19px;
-    color: var(--text-white);
-    line-height: 1.3;
-    margin-bottom: 20px;
-}
+        .card .kelas-tag {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+            letter-spacing: 1px;
+        }
 
-.card .action {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--primary-glow);
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.3s;
-}
+        .card .mapel {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            color: #ffffff;
+        }
 
-.card:hover .action {
-    color: #4ade80; /* Hijau lebih terang saat hover */
-}
+        .card .btn-start {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--accent-color);
+            transition: 0.3s;
+        }
 
-/* Animasi sederhana untuk icon panah */
-.card .action::after {
-    content: "→";
-    transition: transform 0.3s;
-}
+        mark.hi { background: #fff; color: #000; padding: 0 4px; border-radius: 4px; font-weight: 800; }
 
-.card:hover .action::after {
-    transform: translateX(5px);
-}
-
-/* Highlight Color (Warna emas transparan) */
-mark.hi {
-    background: rgba(212, 175, 55, 0.2);
-    color: var(--accent-gold);
-    padding: 0 2px;
-    border-radius: 2px;
-}
-
-.empty {
-    grid-column: 1/-1;
-    padding: 50px;
-    color: #4a5568;
-}
-</style>
+        .loading { grid-column: 1/-1; padding: 100px; color: var(--text-gray); font-size: 18px; }
+    </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Portal Tes Pengesahan KBM</h1>
-    <p class="subtitle">MTS AMTSILATI</p>
-    
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Cari Mata Pelajaran..." autocomplete="off">
+    <div class="logo-wrapper">
+        <div class="logo-madrasah"></div>
     </div>
     
-    <div id="results" class="results"></div>
+    <h1>Portal Tes<br>Pengesahan KBM</h1>
+    <p class="subtitle">MTs Amtsilati</p>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Cari Mata Pelajaran atau Kelas..." autocomplete="off">
+    </div>
+
+    <div id="results" class="results">
+        <div class="loading">Menghubungkan ke data madrasah...</div>
+    </div>
 </div>
 
 <script>
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
 let allData = [];
 
-function parseCSV(text){
-    const lines = text.split(/\r?\n/);
-    if(lines.length === 0) return [];
-    const headers = lines.shift().split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(h => h.trim().toLowerCase());
-    const iKelas = headers.indexOf("kelas");
-    const iMapel = headers.indexOf("mapel");
-    const iLink  = headers.indexOf("link");
-    
-    const result = [];
-    lines.forEach(line => {
-        if(!line.trim()) return;
-        const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g,'').trim());
-        if(cols[iMapel]) {
-            result.push({ kelas: cols[iKelas] || "-", mapel: cols[iMapel], link: cols[iLink] || "#" });
-        }
-    });
-    return result;
-}
-
-async function fetchCSV(){
+async function init() {
     try {
         const res = await fetch(CSV_URL);
         const text = await res.text();
         allData = parseCSV(text);
-    } catch(e) {
-        document.getElementById("results").innerHTML = '<div class="empty">Gagal memuat data.</div>';
+        render(allData);
+    } catch (e) {
+        document.getElementById("results").innerHTML = "Koneksi Bermasalah.";
     }
 }
 
-function highlight(text, q){
-    if(!q) return text;
-    const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
-    return text.replace(re, m => `<mark class="hi">${m}</mark>`);
-}
-
-function renderResults(data, q = ""){
-    const container = document.getElementById("results");
-    container.innerHTML = "";
-    if(data.length === 0){
-        container.innerHTML = '<div class="empty">Tidak ditemukan.</div>'; 
-        return;
-    }
+function parseCSV(text) {
+    const lines = text.split(/\r?\n/);
+    const headers = lines[0].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(h => h.trim().toLowerCase());
+    const iK = headers.indexOf("kelas"), iM = headers.indexOf("mapel"), iL = headers.indexOf("link");
     
-    data.forEach((item, i) => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-            <span class="kelas">KBM KELAS ${highlight(item.kelas, q)}</span>
-            <div class="mapel">${highlight(item.mapel, q)}</div>
-            <div class="action">KERJAKAN SEKARANG</div>
-        `;
-
-        div.onclick = () => { if(item.link !== "#") window.location.href = item.link; };
-        container.appendChild(div);
-        setTimeout(() => div.classList.add("show"), 40 * i);
+    return lines.slice(1).filter(l => l.trim()).map(line => {
+        const c = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g,'').trim());
+        return { kelas: c[iK] || "", mapel: c[iM] || "", link: c[iL] || "#" };
     });
 }
 
-document.getElementById("searchInput").addEventListener("input", function(){
-    const q = this.value.toLowerCase().trim();
-    if(!q){ document.getElementById("results").innerHTML = ""; return; }
-    const filtered = allData.filter(x => x.kelas.toLowerCase().includes(q) || x.mapel.toLowerCase().includes(q));
-    renderResults(filtered, q);
+// Logika Warna Kontras Per Tingkatan
+function getAccentColor(kelas) {
+    if(kelas.includes("7")) return "#00f5ff"; // Cyan / Turquoise (Kontras Maksimal)
+    if(kelas.includes("8")) return "#3b82f6"; // Electric Blue
+    if(kelas.includes("9")) return "#fbbf24"; // Amber / Sunset Orange
+    return "#31c157"; // Hijau Fallback
+}
+
+function render(data, q = "") {
+    const container = document.getElementById("results");
+    container.innerHTML = data.length ? "" : "<div class='loading'>Mata Pelajaran Tidak Ditemukan.</div>";
+    
+    data.forEach((item, i) => {
+        const color = getAccentColor(item.kelas);
+        const card = document.createElement("div");
+        card.className = "card";
+        card.style.setProperty('--accent-color', color);
+        
+        card.innerHTML = `
+            <span class="kelas-tag">KBM KELAS ${item.kelas}</span>
+            <div class="mapel">${q ? item.mapel.replace(new RegExp(q, 'gi'), m => `<mark class="hi">${m}</mark>`) : item.mapel}</div>
+            <div class="btn-start">MULAI KERJAKAN ➔</div>
+        `;
+        
+        card.onclick = () => { if(item.link !== "#") window.open(item.link, '_blank'); };
+        container.appendChild(card);
+        setTimeout(() => card.classList.add("show"), i * 40);
+    });
+}
+
+document.getElementById("searchInput").addEventListener("input", (e) => {
+    const q = e.target.value.toLowerCase();
+    const filtered = allData.filter(d => d.mapel.toLowerCase().includes(q) || d.kelas.toLowerCase().includes(q));
+    render(filtered, q);
 });
 
-fetchCSV();
+init();
 </script>
 </body>
 </html>
-
-
