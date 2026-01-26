@@ -28,7 +28,6 @@
 
         body { display: flex; flex-direction: column; }
 
-        /* MASKOT ROBOT */
         .corner-robot {
             position: fixed;
             bottom: 70px;
@@ -40,7 +39,6 @@
         }
         @keyframes floatRobot { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* HEADER 3D */
         header {
             text-align: center;
             padding: 40px 0 10px;
@@ -84,7 +82,6 @@
         }
         #digital-clock { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
 
-        /* SLIDE UP LOGIC */
         body.searching header {
             margin-top: -320px;
             opacity: 0;
@@ -119,7 +116,6 @@
             transition: 0.3s;
         }
 
-        /* AREA KARTU */
         main {
             flex: 1;
             overflow-y: auto;
@@ -141,41 +137,23 @@
             align-content: start;
         }
 
-        /* CARD 3D - LAYOUT CENTERED */
+        /* CARD 3D - TIDAK BISA DIKLIK LANGSUNG */
         .card {
             background: #ffffff;
             color: #111;
             border-radius: 25px;
             padding: 30px;
             box-shadow: 0 10px 0 #e0e0e0, 0 15px 30px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: 0.3s;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Membuat semua isi kartu rata tengah */
+            align-items: center;
             text-align: center;
+            cursor: default; /* Kursor panah biasa */
         }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 0 var(--accent-color), 0 20px 40px rgba(0,0,0,0.2); }
 
-        .verified-header { 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            margin-bottom: 15px; 
-        }
+        .verified-header { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
         .info-tag { font-size: 11px; font-weight: 800; color: #4b5563; text-transform: uppercase; margin: 0; }
-        .verified-badge { 
-            background: var(--verified-purple); 
-            color: #fff; 
-            border-radius: 50%; 
-            width: 18px; 
-            height: 18px; 
-            display: inline-flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 10px; 
-            flex-shrink: 0;
-        }
+        .verified-badge { background: var(--verified-purple); color: #fff; border-radius: 50%; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
 
         .badge-kelas {
             background: var(--accent-color);
@@ -185,27 +163,35 @@
             font-weight: 900;
             font-size: 18px;
             margin-bottom: 15px;
-            display: inline-block;
-            width: fit-content;
         }
         
-        /* NAMA MAPEL - DIPERBESAR & RATA TENGAH */
         .mapel { 
-            font-size: 26px; /* Ukuran diperbesar */
+            font-size: 26px; 
             font-weight: 800; 
-            margin-bottom: 20px; 
+            margin-bottom: 25px; 
             line-height: 1.2; 
             color: #111827;
-            width: 100%;
         }
 
+        /* TOMBOL MULAI 3D - HANYA INI YANG BISA DIKLIK */
         .btn-mulai {
-            font-size: 13px; 
+            background: #00AA5B;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 14px; 
             font-weight: 800; 
-            color: #00AA5B; 
             text-transform: uppercase;
             letter-spacing: 1px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 5px 0 #008f4d, 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-block;
         }
+        .btn-mulai:hover { transform: translateY(-2px); background: #00c86b; box-shadow: 0 7px 0 #008f4d; }
+        .btn-mulai:active { transform: translateY(3px); box-shadow: 0 2px 0 #008f4d; }
 
         footer {
             position: fixed;
@@ -319,6 +305,8 @@ function render(data) {
         card.className = "card";
         card.style.setProperty('--accent-color', accent);
         card.style.setProperty('--text-color', txt);
+        
+        // Klik dipindahkan ke tombol, bukan ke kartu
         card.innerHTML = `
             <div class="verified-header">
                 <span class="info-tag">Madrasah Digital</span>
@@ -326,9 +314,8 @@ function render(data) {
             </div>
             <div class="badge-kelas">KELAS ${item.kelas}</div>
             <div class="mapel">${item.mapel}</div>
-            <div class="btn-mulai">MULAI TES SEKARANG ➔</div>
+            <button class="btn-mulai" onclick="window.location.href='${item.link}'">MULAI TES SEKARANG ➔</button>
         `;
-        card.onclick = () => { if(item.link !== "#") window.location.href = item.link; };
         container.appendChild(card);
     });
 }
