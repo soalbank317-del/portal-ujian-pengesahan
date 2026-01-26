@@ -29,6 +29,29 @@
 
         body { display: flex; flex-direction: column; }
 
+        /* CUSTOM TOAST NOTIFICATION */
+        #customToast {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            z-index: 9999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid var(--cls-8);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+        #customToast.show { top: 30px; }
+
         .corner-robot {
             position: fixed;
             bottom: 70px;
@@ -93,7 +116,6 @@
             z-index: 1001;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         body.searching .search-container { padding-top: 40px; }
 
         .search-wrapper {
@@ -178,7 +200,7 @@
         .btn-disabled {
             background: var(--disabled) !important;
             box-shadow: 0 5px 0 #6b7280 !important;
-            cursor: not-allowed !important;
+            cursor: pointer !important; /* Biar tetap bisa diklik untuk munculin toast */
             opacity: 0.7;
         }
 
@@ -201,6 +223,10 @@
     </style>
 </head>
 <body>
+
+    <div id="customToast">
+        <span>⚠️</span> Link soal belum di-update oleh admin.
+    </div>
 
     <img src="https://i.ibb.co.com/mVzkz5xG/robot-removebg-preview.png" class="corner-robot">
 
@@ -230,6 +256,7 @@
 <script>
 const searchInput = document.getElementById('searchInput');
 const body = document.body;
+const toast = document.getElementById('customToast');
 
 function updateClock() {
     const now = new Date();
@@ -254,21 +281,22 @@ fetch(CSV_URL).then(res => res.text()).then(text => {
     });
 });
 
-// VALIDASI LINK SUPER KETAT
 function isValidHttpUrl(string) {
   let url;
-  try {
-    url = new URL(string);
-  } catch (_) {
-    return false;  
-  }
+  try { url = new URL(string); } catch (_) { return false; }
   return url.protocol === "http:" || url.protocol === "https:";
+}
+
+// FUNGSI SHOW TOAST
+function showToast() {
+    toast.classList.add('show');
+    setTimeout(() => { toast.classList.remove('show'); }, 3000);
 }
 
 function handleGoToLink(url, event) {
     event.preventDefault();
     if (!isValidHttpUrl(url)) {
-        alert("Link soal belum di-update oleh admin.");
+        showToast(); // Panggil notifikasi custom
         return false;
     }
     window.location.href = url;
@@ -298,7 +326,6 @@ function render(data) {
         if(item.kelas.includes("8")) { accent = "#facc15"; txt = "#854d0e"; }
         if(item.kelas.includes("9")) accent = "#dc2626";
 
-        // Filter Link: Harus berawalan http/https
         const hasLink = isValidHttpUrl(item.link);
         const btnClass = hasLink ? "btn-mulai" : "btn-mulai btn-disabled";
         const btnText = hasLink ? "MULAI TES SEKARANG ➔" : "BELUM TERSEDIA";
