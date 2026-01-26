@@ -13,6 +13,7 @@
             --cls-8: #facc15; 
             --cls-9: #dc2626; 
             --verified-purple: #9b59b6;
+            --disabled: #9ca3af;
         }
 
         html, body {
@@ -57,7 +58,6 @@
             border: 4px solid rgba(255, 255, 255, 0.5);
             display: inline-block;
             transform: perspective(500px) rotateX(10deg);
-            transition: 0.5s;
         }
         .logo-madrasah img { width: 100%; height: 100%; object-fit: contain; }
 
@@ -67,7 +67,6 @@
             font-weight: 800;
             color: #ffffff;
             text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbbbbb, 0 4px 10px rgba(0,0,0,.3);
-            transition: 0.5s;
         }
 
         .clock-container {
@@ -78,9 +77,8 @@
             margin-bottom: 10px;
             box-shadow: 0 8px 15px rgba(0,0,0,0.1), 0 4px 0 rgba(255,255,255,0.2) inset;
             transform: perspective(1000px) rotateX(10deg);
-            transition: 0.5s;
         }
-        #digital-clock { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+        #digital-clock { font-size: 22px; font-weight: 800; }
 
         body.searching header {
             margin-top: -320px;
@@ -95,6 +93,8 @@
             z-index: 1001;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
+        body.searching .search-container { padding-top: 40px; }
 
         .search-wrapper {
             position: relative;
@@ -113,7 +113,6 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.2), inset 0 -4px 0 rgba(0,0,0,0.1);
             outline: none;
             box-sizing: border-box;
-            transition: 0.3s;
         }
 
         main {
@@ -122,9 +121,6 @@
             padding: 0 20px 80px;
             display: none;
             justify-content: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: 0.5s;
         }
         body.searching main { display: flex; opacity: 1; transform: translateY(0); }
 
@@ -147,12 +143,11 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            cursor: default;
         }
 
         .verified-header { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
-        .info-tag { font-size: 11px; font-weight: 800; color: #4b5563; text-transform: uppercase; margin: 0; }
-        .verified-badge { background: var(--verified-purple); color: #fff; border-radius: 50%; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+        .info-tag { font-size: 11px; font-weight: 800; color: #4b5563; text-transform: uppercase; }
+        .verified-badge { background: var(--verified-purple); color: #fff; border-radius: 50%; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; }
 
         .badge-kelas {
             background: var(--accent-color);
@@ -164,13 +159,7 @@
             margin-bottom: 15px;
         }
         
-        .mapel { 
-            font-size: 26px; 
-            font-weight: 800; 
-            margin-bottom: 25px; 
-            line-height: 1.2; 
-            color: #111827;
-        }
+        .mapel { font-size: 26px; font-weight: 800; margin-bottom: 25px; line-height: 1.2; color: #111827; }
 
         .btn-mulai {
             background: #00AA5B;
@@ -180,16 +169,19 @@
             font-size: 14px; 
             font-weight: 800; 
             text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
             border: none;
-            box-shadow: 0 5px 0 #008f4d, 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 0 #008f4d;
             transition: 0.2s;
-            text-decoration: none;
-            display: inline-block;
         }
-        .btn-mulai:hover { transform: translateY(-2px); background: #00c86b; box-shadow: 0 7px 0 #008f4d; }
-        .btn-mulai:active { transform: translateY(3px); box-shadow: 0 2px 0 #008f4d; }
+
+        /* STYLE SAAT LINK TIDAK ADA */
+        .btn-disabled {
+            background: var(--disabled) !important;
+            box-shadow: 0 5px 0 #6b7280 !important;
+            cursor: not-allowed !important;
+            opacity: 0.7;
+        }
 
         footer {
             position: fixed;
@@ -200,14 +192,12 @@
             text-align: center;
             font-size: 12px;
             z-index: 100;
-            backdrop-filter: blur(5px);
         }
 
         @media (max-width: 600px) {
             .results { grid-template-columns: 1fr; }
             input { font-size: 17px; padding-left: 70px; }
             body.searching header { margin-top: -380px; }
-            .mapel { font-size: 22px; }
         }
     </style>
 </head>
@@ -228,7 +218,7 @@
     <div class="search-container">
         <div class="search-wrapper">
             <span class="icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="Ketik nama mata pelajaran..." autocomplete="off">
+            <input type="text" id="searchInput" placeholder="Cari Mapel..." autocomplete="off">
         </div>
     </div>
 
@@ -236,9 +226,7 @@
         <div id="results" class="results"></div>
     </main>
 
-    <footer>
-        MTs AMTSILATI &copy; 2026 - Dikembangkan dengan ❤️
-    </footer>
+    <footer>MTs AMTSILATI &copy; 2026</footer>
 
 <script>
 const searchInput = document.getElementById('searchInput');
@@ -249,8 +237,7 @@ function updateClock() {
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
-    document.getElementById('digital-clock').innerHTML = 
-        `${hours}:${minutes}:<span style="color: #facc15;">${seconds}</span>`;
+    document.getElementById('digital-clock').innerHTML = `${hours}:${minutes}:<span style="color: #facc15;">${seconds}</span>`;
 }
 setInterval(updateClock, 1000); updateClock();
 
@@ -261,30 +248,33 @@ fetch(CSV_URL).then(res => res.text()).then(text => {
     const lines = text.split(/\r?\n/).slice(1);
     allData = lines.map(line => {
         const c = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(x => x.replace(/^"|"$/g,'').trim());
-        return { kelas: c[0] || "", mapel: c[1] || "", link: c[2] || "#" };
-    });
-
-    // LOGIKA PENGURUTAN: KELAS (7,8,9) LALU ABJAD MAPEL (A-Z)
-    allData.sort((a, b) => {
-        if (a.kelas !== b.kelas) {
-            return a.kelas.localeCompare(b.kelas, undefined, {numeric: true});
-        }
+        return { kelas: c[0] || "", mapel: c[1] || "", link: c[2] || "" };
+    }).sort((a, b) => {
+        if (a.kelas !== b.kelas) return a.kelas.localeCompare(b.kelas, undefined, {numeric: true});
         return a.mapel.localeCompare(b.mapel);
     });
 });
+
+// FUNGSI NAVIGASI AMAN
+function handleGoToLink(url, event) {
+    event.preventDefault(); // Stop aksi default
+    if (!url || url === "#" || url.trim() === "") {
+        console.log("Link belum ada.");
+        return false;
+    }
+    window.location.href = url;
+}
 
 searchInput.addEventListener('input', (e) => {
     const q = e.target.value.toLowerCase().trim();
     if (q.length > 0) {
         body.classList.add('searching');
-        const filtered = allData.filter(d => d.mapel.toLowerCase().includes(q) || d.kelas.toLowerCase().includes(q));
-        render(filtered);
+        render(allData.filter(d => d.mapel.toLowerCase().includes(q) || d.kelas.toLowerCase().includes(q)));
     } else {
         document.getElementById('results').innerHTML = '';
     }
 });
 
-// Fokus Otomatis & Kontrol Slide
 searchInput.addEventListener('focus', () => { body.classList.add('searching'); });
 searchInput.addEventListener('blur', () => { if (searchInput.value.trim() === "") body.classList.remove('searching'); });
 
@@ -299,18 +289,20 @@ function render(data) {
         if(item.kelas.includes("8")) { accent = "#facc15"; txt = "#854d0e"; }
         if(item.kelas.includes("9")) accent = "#dc2626";
 
+        // Cek apakah link valid
+        const hasLink = item.link && item.link !== "#" && item.link.trim() !== "";
+        const btnClass = hasLink ? "btn-mulai" : "btn-mulai btn-disabled";
+        const btnText = hasLink ? "MULAI TES SEKARANG ➔" : "BELUM TERSEDIA";
+
         const card = document.createElement("div");
         card.className = "card";
         card.style.setProperty('--accent-color', accent);
         card.style.setProperty('--text-color', txt);
         card.innerHTML = `
-            <div class="verified-header">
-                <span class="info-tag">Madrasah Digital</span>
-                <div class="verified-badge">✓</div>
-            </div>
+            <div class="verified-header"><span class="info-tag">Madrasah Digital</span><div class="verified-badge">✓</div></div>
             <div class="badge-kelas">KELAS ${item.kelas}</div>
             <div class="mapel">${item.mapel}</div>
-            <button class="btn-mulai" onclick="window.location.href='${item.link}'">MULAI TES SEKARANG ➔</button>
+            <button class="${btnClass}" onclick="handleGoToLink('${item.link}', event)">${btnText}</button>
         `;
         container.appendChild(card);
     });
