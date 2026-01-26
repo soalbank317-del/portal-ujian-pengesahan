@@ -137,7 +137,6 @@
             align-content: start;
         }
 
-        /* CARD 3D - TIDAK BISA DIKLIK LANGSUNG */
         .card {
             background: #ffffff;
             color: #111;
@@ -148,7 +147,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            cursor: default; /* Kursor panah biasa */
+            cursor: default;
         }
 
         .verified-header { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
@@ -173,7 +172,6 @@
             color: #111827;
         }
 
-        /* TOMBOL MULAI 3D - HANYA INI YANG BISA DIKLIK */
         .btn-mulai {
             background: #00AA5B;
             color: white;
@@ -256,18 +254,6 @@ function updateClock() {
 }
 setInterval(updateClock, 1000); updateClock();
 
-document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
-        searchInput.value = '';
-        body.classList.remove('searching');
-        document.getElementById('results').innerHTML = '';
-        searchInput.blur();
-    }
-});
-
-searchInput.addEventListener('focus', () => { body.classList.add('searching'); });
-searchInput.addEventListener('blur', () => { if (searchInput.value.trim() === "") body.classList.remove('searching'); });
-
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGPq9jpsKX5zc9RIsZfEuqLMJ2GrucmiAjzlSezF8oVmA0SZ3-58mekFIFI59GhLiE3vyJ_K0Lx3Zv/pub?output=csv";
 let allData = [];
 
@@ -276,6 +262,14 @@ fetch(CSV_URL).then(res => res.text()).then(text => {
     allData = lines.map(line => {
         const c = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(x => x.replace(/^"|"$/g,'').trim());
         return { kelas: c[0] || "", mapel: c[1] || "", link: c[2] || "#" };
+    });
+
+    // LOGIKA PENGURUTAN: KELAS (7,8,9) LALU ABJAD MAPEL (A-Z)
+    allData.sort((a, b) => {
+        if (a.kelas !== b.kelas) {
+            return a.kelas.localeCompare(b.kelas, undefined, {numeric: true});
+        }
+        return a.mapel.localeCompare(b.mapel);
     });
 });
 
@@ -289,6 +283,10 @@ searchInput.addEventListener('input', (e) => {
         document.getElementById('results').innerHTML = '';
     }
 });
+
+// Fokus Otomatis & Kontrol Slide
+searchInput.addEventListener('focus', () => { body.classList.add('searching'); });
+searchInput.addEventListener('blur', () => { if (searchInput.value.trim() === "") body.classList.remove('searching'); });
 
 function render(data) {
     const container = document.getElementById('results');
@@ -305,11 +303,9 @@ function render(data) {
         card.className = "card";
         card.style.setProperty('--accent-color', accent);
         card.style.setProperty('--text-color', txt);
-        
-        // Klik dipindahkan ke tombol, bukan ke kartu
         card.innerHTML = `
             <div class="verified-header">
-                <span class="info-tag">Soal Tes Pengesahan</span>
+                <span class="info-tag">Madrasah Digital</span>
                 <div class="verified-badge">✓</div>
             </div>
             <div class="badge-kelas">KELAS ${item.kelas}</div>
@@ -322,4 +318,3 @@ function render(data) {
 </script>
 </body>
 </html>
-
