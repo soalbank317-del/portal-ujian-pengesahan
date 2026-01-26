@@ -175,7 +175,6 @@
             transition: 0.2s;
         }
 
-        /* STYLE SAAT LINK TIDAK ADA */
         .btn-disabled {
             background: var(--disabled) !important;
             box-shadow: 0 5px 0 #6b7280 !important;
@@ -255,11 +254,21 @@ fetch(CSV_URL).then(res => res.text()).then(text => {
     });
 });
 
-// FUNGSI NAVIGASI AMAN
+// VALIDASI LINK SUPER KETAT
+function isValidHttpUrl(string) {
+  let url;
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;  
+  }
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
 function handleGoToLink(url, event) {
-    event.preventDefault(); // Stop aksi default
-    if (!url || url === "#" || url.trim() === "") {
-        console.log("Link belum ada.");
+    event.preventDefault();
+    if (!isValidHttpUrl(url)) {
+        alert("Link soal belum di-update oleh admin.");
         return false;
     }
     window.location.href = url;
@@ -289,8 +298,8 @@ function render(data) {
         if(item.kelas.includes("8")) { accent = "#facc15"; txt = "#854d0e"; }
         if(item.kelas.includes("9")) accent = "#dc2626";
 
-        // Cek apakah link valid
-        const hasLink = item.link && item.link !== "#" && item.link.trim() !== "";
+        // Filter Link: Harus berawalan http/https
+        const hasLink = isValidHttpUrl(item.link);
         const btnClass = hasLink ? "btn-mulai" : "btn-mulai btn-disabled";
         const btnText = hasLink ? "MULAI TES SEKARANG ➔" : "BELUM TERSEDIA";
 
