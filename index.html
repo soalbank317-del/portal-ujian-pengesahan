@@ -111,7 +111,7 @@
         }
 
         .search-container {
-            padding: 20px;
+            padding: 35px;
             flex-shrink: 0;
             z-index: 1001;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -335,7 +335,7 @@ function render(data) {
         card.style.setProperty('--accent-color', accent);
         card.style.setProperty('--text-color', txt);
         card.innerHTML = `
-            <div class="verified-header"><span class="info-tag">Madrasah Digital</span><div class="verified-badge">✓</div></div>
+            <div class="verified-header"><span class="info-tag">SOAL TES PENGESAHAN</span><div class="verified-badge">✓</div></div>
             <div class="badge-kelas">KELAS ${item.kelas}</div>
             <div class="mapel">${item.mapel}</div>
             <button class="${btnClass}" onclick="handleGoToLink('${item.link}', event)">${btnText}</button>
@@ -346,3 +346,4 @@ function render(data) {
 </script>
 </body>
 </html>
+
