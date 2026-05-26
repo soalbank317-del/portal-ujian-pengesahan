@@ -154,6 +154,7 @@
             color: var(--text-main);
         }
         #digital-clock { font-size: 22px; font-weight: 800; }
+        .hari-badge { color: #facc15; margin-right: 5px; text-transform: uppercase; }
 
         body.searching header {
             margin-top: -320px;
@@ -298,7 +299,7 @@
         </div>
         <h1>PORTAL TES PENGESAHAN</h1>
         <div class="clock-container">
-            <div id="digital-clock">00:00:00</div>
+            <div id="digital-clock">SENIN, 00:00:00</div>
         </div>
     </header>
 
@@ -321,13 +322,32 @@ const body = document.body;
 const toast = document.getElementById('customToast');
 const themeToggle = document.getElementById('themeToggle');
 
-// FUNGSI JAM
+// FUNGSI RESET STATE (KEMBALI KE HALAMAN UTAMA)
+function resetToHome() {
+    searchInput.value = "";
+    body.classList.remove('searching');
+    document.getElementById('results').innerHTML = '';
+}
+
+// Otomatis reset saat halaman di-reload atau di-back dari SEB (menggunakan pageshow agar anti-cache)
+window.addEventListener('pageshow', function (event) {
+    resetToHome();
+});
+
+// FUNGSI JAM + HARI
 function updateClock() {
     const now = new Date();
+    
+    // Array Nama Hari Indonesia
+    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const dayName = days[now.getDay()];
+    
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
-    document.getElementById('digital-clock').innerHTML = `${hours}:${minutes}:<span style="color: #facc15;">${seconds}</span>`;
+    
+    document.getElementById('digital-clock').innerHTML = 
+        `<span class="hari-badge">${dayName}</span>, ${hours}:${minutes}:<span style="color: #facc15;">${seconds}</span>`;
 }
 setInterval(updateClock, 1000); updateClock();
 
@@ -376,9 +396,16 @@ function showToast() {
 function handleGoToLink(url, event) {
     event.preventDefault();
     if (!isValidHttpUrl(url)) {
-        showToast(); // Panggil notifikasi custom
+        showToast(); 
         return false;
     }
+    
+    // Reset pencarian beberapa milidetik sebelum diarahkan, 
+    // agar saat ujian selesai dan anak menekan tombol kembali, portal sudah dalam kondisi bersih.
+    setTimeout(() => {
+        resetToHome();
+    }, 400);
+
     window.location.href = url;
 }
 
@@ -389,6 +416,7 @@ searchInput.addEventListener('input', (e) => {
         render(allData.filter(d => d.mapel.toLowerCase().includes(q) || d.kelas.toLowerCase().includes(q)));
     } else {
         document.getElementById('results').innerHTML = '';
+        body.classList.remove('searching');
     }
 });
 
